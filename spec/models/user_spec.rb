@@ -1,8 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  describe "Associations with User" do
+    it { should have_many(:friendships).without_validating_presence }
+  end
+
   before(:all) do
-    p @user1 = User.find_by(username: 'TesterJoe', email: 'testerjoe@gmail.com') || create(:user)
+    @user1 = User.find_by(username: 'TesterJoe', email: 'testerjoe@gmail.com') || create(:user)
   end
 
   it 'is valid with valid attributes' do
