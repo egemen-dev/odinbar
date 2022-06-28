@@ -7,7 +7,7 @@ class Friendship < ApplicationRecord
   validates :user_id, presence: true
   validates :friend_id, presence: true
   validate :user_and_friend_are_not_the_same
-  validates_uniqueness_of :user_id, scope: [:user_id]
+  validates_uniqueness_of :user_id, scope: [:friend_id]
 
   def user_and_friend_are_not_the_same
     if friend == user
