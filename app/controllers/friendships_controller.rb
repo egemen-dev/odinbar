@@ -1,7 +1,6 @@
 class FriendshipsController < ApplicationController
-
   before_action :authenticate_user!
-  
+
   # GET /friendships or /friendships.json
   def index
     @friendships = Friendship.all
@@ -22,17 +21,13 @@ class FriendshipsController < ApplicationController
 
   # POST /friendships or /friendships.json
   def create
-    @friendship = Friendship.new(friendship_params)
-
-    respond_to do |format|
+    @friendship = current_user.friendships.new(friend_id: params[:friend_id])
       if @friendship.save
-        format.html { redirect_to friendship_url(@friendship), notice: "Friendship was successfully created." }
-        format.json { render :show, status: :created, location: @friendship }
+        flash[:notice] = 'Friendship Request was successfully created.'
+        redirect_to friendship_path(@friendship)
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @friendship.errors, status: :unprocessable_entity }
+        flash[:alert] = 'Something went wrong, try again later.'
       end
-    end
   end
 
   # PATCH/PUT /friendships/1 or /friendships/1.json
@@ -66,6 +61,6 @@ class FriendshipsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def friendship_params
-      params.fetch(:friendship, {})
+      params.require(:friendship).permit(:friend_id)
     end
 end
