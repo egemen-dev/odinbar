@@ -1,7 +1,6 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-  <%= link_to 'Odinbar', root_path, class: 'is-size-3 has-text-weight-bold' %>
-  <%# <a class= "is-size-3 has-text-weight-bold">Odinbar</a> %>
+  <%= link_to 'Odinbar', root_path, class: 'is-size-3 has-text-weight-bold has-text-black' %>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
@@ -12,7 +11,7 @@
   <% if user_signed_in? %>
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-      <%= link_to 'My profile', profile_path(current_user.id), class: 'navbar-item' %>
+      <%= link_to 'My profile', profile_path(current_user.id), class: 'navbar-item has-text-black' %>
       </div>
       <div class="navbar-end">
         <div class="navbar-item">
