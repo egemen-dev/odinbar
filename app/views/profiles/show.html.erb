@@ -3,21 +3,21 @@
 </div>
 <div class="container columns p-3">
   <div class="column is-4 px-0 mx-2 py-1">
-    <a href="">
+    <a href="<%= users_friends_path %>">
       <div class="box my-1 has-text-centered">
-        <p class="has-text-weight-bold">Friends: <%= @user.friends.count %></p>
+        <p class="has-text-weight-bold">Friends: <%= @user.active_friends.count %></p>
       </div>
     </a>
   </div>
   <div class="column is-4 px-0 mx-2 py-1">
-  <a href="">
+  <a href="<%= users_sent_requests_path %>">
     <div class="box my-1 has-text-centered">
       <p class="has-text-weight-bold">Sended Requests: <%= @user.sent_requests.count %></p>
     </div>
   </a>
   </div>
   <div class="column is-4 px-0 mx-2 py-1">
-  <a href="">
+  <a href="<%= users_received_requests_path %>">
     <div class="box my-1 has-text-centered">
       <p class="has-text-weight-bold">Received Requests: <%= @user.received_requests.count %></p>
     </div>
