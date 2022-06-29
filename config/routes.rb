@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root 'profiles#index'
   devise_for :users
   resources :friendships
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
+  get 'users/friends' => 'users#friends', :as => :users_friends
+  get 'users/received_requests' => 'users#received_requests', :as => :users_received_requests
+  get 'users/sent_requests' => 'users#sent_requests', :as => :users_sent_requests
+
 end
