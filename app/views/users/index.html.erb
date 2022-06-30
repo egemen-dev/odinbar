@@ -1,6 +1,6 @@
 <% @users.each do |user| %>
 <br>
-<%= user.username %>
+<a href="<%= users_profile_path(user) %>"><%= user.username %></a>
   <%= form_with(model: @friendship, url: friendships_path) do |form| %>
     <%= form.hidden_field :friend_id, value: user.id %>
     <%= form.submit 'Send Request' %>

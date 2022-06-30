@@ -14,11 +14,11 @@
   <body>
     <% flash.each do |name, msg| -%>
       <% if name == 'error' %>
-        <%= content_tag :div, msg, class: 'notification is-danger' %>
+        <%= content_tag :div, msg, class: 'notification is-danger my-0' %>
         <% elsif name == 'notice' %>
-          <%= content_tag :div, msg, class: 'notification is-success' %>
+          <%= content_tag :div, msg, class: 'notification is-success my-0' %>
         <% elsif name == 'alert' %>
-          <%= content_tag :div, msg, class: 'notification is-warning' %>
+          <%= content_tag :div, msg, class: 'notification is-warning my-0' %>
       <% end %>
     <% end %>
     

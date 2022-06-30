@@ -1,0 +1,35 @@
+<div class="container mb-1">
+  <div class="card has-text-centered py-6">
+    <p class="title is-3 pb-2 has-text-weight-bold"><%= @user.username %></p>
+    <p class="subtitle is-6"><%= @user.email %></p>
+    <p class="subtitle is-6">Friends: <%= @user.active_friends.count %></p>
+  </div>
+</div>
+<% if @user == current_user %>
+  <div class="container columns py-3">
+    <div class="column is-4 py-0">
+      <a href="<%= users_friends_path %>">
+        <div class="box my-1 py-3 has-text-centered">
+          <p class="has-text-weight-bold">Friends: <%= @user.active_friends.count %></p>
+        </div>
+      </a>
+    </div>
+    <div class="column is-4 py-0">
+    <a href="<%= users_sent_requests_path %>">
+      <div class="box my-1 py-3 has-text-centered">
+        <p class="has-text-weight-bold">Sended Requests: <%= @user.sent_requests.count %></p>
+      </div>
+    </a>
+    </div>
+    <div class="column is-4 py-0">
+    <a href="<%= users_received_requests_path %>">
+      <div class="box my-1 py-3 has-text-centered">
+        <p class="has-text-weight-bold">Received Requests: <%= @user.received_requests.count %></p>
+      </div>
+    </a>
+    </div>
+  </div>
+<% end %>
+
+  
+  
