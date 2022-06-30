@@ -16,8 +16,18 @@ class User < ApplicationRecord
   # Users that sent me the request
   has_many :type_2_friends, through: :acceptance_by_me, source: :user
 
+  # Users I sent request to
+  has_many :request_sent_users, through: :sent_requests, source: :friend
+
+  # Users I received request from
+  has_many :request_received_users, through: :received_requests, source: :user
+
   def active_friends
     type_1_friends | type_2_friends
+  end
+
+  def friendship_with(user)
+    Friendship.find_by(user_id: user.id, friend_id: self.id) || Friendship.find_by(user_id: self.id, friend_id: user.id)
   end
 
   # Validations
