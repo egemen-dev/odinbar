@@ -1,0 +1,28 @@
+<% unless @friends.nil? %>
+  <% @friends.each do |f| %>
+    <a href="<%= users_profile_path(f) %>"><%= f.username %></a>
+    <br>
+  <% end %>
+<% end %>
+
+<% unless @received_requests.nil? %>
+  <% @received_requests.each do |f| %>
+    <%= f.user.username %>
+  <br>
+  <%= button_to 'Accept', {:controller => "friendships", :action => "update", :status => true, id: f.id} , :method=>:patch  %>
+  <%= button_to 'Decline', {:controller => "friendships", :action => "destroy", id: f.id} , :method=>:delete  %>
+  <% end %>
+<% end %>
+
+<% unless @sent_requests.nil? %>
+  <% @sent_requests.each do |f| %>
+    <a href="<%= users_profile_path(f.friend_id) %>"><%= f.friend.username %></a>
+    <br>
+    <%= button_to 'Cancel', {:controller => "friendships", :action => "destroy", id: f.id} , :method=>:delete  %>
+  <% end %>
+<% end %>
+
+
+
+
+
