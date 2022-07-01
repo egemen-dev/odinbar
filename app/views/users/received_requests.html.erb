@@ -1,4 +1,10 @@
 <div class="container py-4 m-1 has-text-centered">
   <p class="is-size-4 has-text-weight-bold">Received Requests</p>
 </div>
-<%= render 'layouts/profiles' %>
+
+<% @received_requests.each do |friendship| %>
+  <a href="<%= users_profile_path(friendship.user_id) %>"><%= friendship.user.username %></a>
+  <br>
+  <%= button_to 'Accept', {:controller => "friendships", :action => "update", :status => true, id: friendship.id}, :method=>:patch  %>
+  <%= button_to 'Decline', {:controller => "friendships", :action => "destroy", id: friendship.id}, :method=>:delete  %>
+<% end %>

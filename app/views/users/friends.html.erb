@@ -1,4 +1,12 @@
 <div class="container py-4 m-1 has-text-centered">
   <p class="is-size-4 has-text-weight-bold">My Friends</p>
 </div>
-<%= render 'layouts/profiles' %>
+
+<% @friends.each do |user| %>
+  <a href="<%= users_profile_path(user) %>"><%= user.username %></a>
+  <% friendship = current_user.friendship_with(user) %>
+  <% if friendship %>
+    <%= button_to 'Unfriend', {:controller => "friendships", :action => "destroy", id: friendship.id}, :method=>:delete %>
+  <% end %>
+  <br>
+<% end %>

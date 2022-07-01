@@ -1,4 +1,9 @@
 <div class="container py-4 m-1 has-text-centered">
   <p class="is-size-4 has-text-weight-bold">Sent Requests</p>
 </div>
-<%= render 'layouts/profiles' %>
+
+<% @sent_requests.each do |friendship| %>
+  <a href="<%= users_profile_path(friendship.friend_id) %>"><%= friendship.friend.username %></a>
+  <br>
+  <%= button_to 'Cancel', {:controller => "friendships", :action => "destroy", id: friendship.id} , :method=>:delete  %>
+<% end %>
