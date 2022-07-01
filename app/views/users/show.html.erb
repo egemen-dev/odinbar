@@ -31,5 +31,26 @@
   </div>
 <% end %>
 
+<div class="container">
+  <div class="columns is-mobile is-centered">
+    <div class="column is-half">
+      <%# Show buttons according to friendship state %>
+      <% friendship = current_user.friendship_with(@user) %>
+      <% if friendship %>
+        <% if current_user.active_friends.include?(@user) %>
+          <%= button_to 'Unfriend', {:controller => "friendships", :action => "destroy", id: friendship.id} , :method=>:delete %>
+        <% elsif friendship.user == current_user %>
+        <%= button_to 'Cancel Request', {:controller => "friendships", :action => "destroy", id: friendship.id} , :method=>:delete %>
+        <% elsif friendship.friend == current_user %>
+          <%= button_to 'Accept', {:controller => "friendships", :action => "update", :status => true, id: friendship.id}, :method=>:patch %>
+          <%= button_to 'Decline', {:controller => "friendships", :action => "destroy", id: friendship.id}, :method=>:delete %>
+        <% end %>
+      <% elsif @user != current_user %>
+        <%= button_to 'Send Request button', {:controller => "friendships", :action => "create", :status => nil, friend_id: @user.id}, :method=>:post %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
   
   
