@@ -2,9 +2,33 @@
   <p class="is-size-4 has-text-weight-bold">Received Requests</p>
 </div>
 
-<% @received_requests.each do |friendship| %>
-  <a href="<%= users_profile_path(friendship.user_id) %>"><%= friendship.user.username %></a>
-  <br>
-  <%= button_to 'Accept', {:controller => "friendships", :action => "update", :status => true, id: friendship.id}, :method=>:patch  %>
-  <%= button_to 'Decline', {:controller => "friendships", :action => "destroy", id: friendship.id}, :method=>:delete  %>
-<% end %>
+<div class="columns is-centered">
+  <div class="column is-7">
+  <% @received_requests.each do |friendship| %> 
+    <div class="card mb-4 px-3 pb-5 special-border">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <img src="https://bulma.io/images/placeholders/96x96.png" class="is-rounded" alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4"><a href="<%= users_profile_path(friendship.user_id) %>"><%= friendship.user.username %></a></p>
+            <p class="subtitle is-6"><%= friendship.user.email %></p>
+          </div>
+        </div>
+      </div>
+      <%# Show buttons according to friendship state %>
+      <div class="columns px-5 is-mobile">
+        <div class="column is-half pb-0">
+          <%= button_to 'Decline', {:controller => "friendships", :action => "destroy", id: friendship.id}, :method=>:delete, class: 'button is-danger is-light is-fullwidth' %>
+        </div>
+        <div class="column is-half ">
+          <%= button_to 'Accept', {:controller => "friendships", :action => "update", :status => true, id: friendship.id}, :method=>:patch, class: 'button is-success is-fullwidth' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  </div>
+</div>
