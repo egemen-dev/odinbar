@@ -10,6 +10,7 @@
     <%= javascript_importmap_tags %>
     <link rel="stylesheet" href="app/assets/stylesheets/application.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="app/javascript/application.js"></script> 
   </head>
 
   <body>
@@ -23,8 +24,8 @@
       <% end %>
     <% end %>
     
-    <%= render "layouts/navbar" %>
     <div class="container">
+      <%= render "layouts/navbar" %>
       <div class="section">
         <%= yield %> 
         <% console %>
