@@ -60,7 +60,7 @@
         <% elsif friendship.user == current_user %>
           <div class="columns px-0">
             <div class="column column is-4 is-offset-8">
-            <%= button_to 'Cancel Request', {:controller => "friendships", :action => "destroy", id: friendship.id} , :method=>:delete, class: 'button is-warning is-fullwidth' %>
+            <%= button_to 'Cancel Request', {:controller => "friendships", :action => "destroy", id: friendship.id} , :method=>:delete, class: 'button is-warning is-light is-fullwidth' %>
             </div>
           </div>
         <% elsif friendship.friend == current_user %>

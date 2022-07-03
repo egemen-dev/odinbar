@@ -29,7 +29,7 @@
         <% elsif friendship.user == current_user %>
           <div class="columns px-5">
             <div class="column">
-            <%= button_to 'Cancel Request', {:controller => "friendships", :action => "destroy", id: friendship.id} , :method=>:delete, class: 'button is-warning is-fullwidth' %>
+            <%= button_to 'Cancel Request', {:controller => "friendships", :action => "destroy", id: friendship.id} , :method=>:delete, class: 'button is-warning is-light is-fullwidth' %>
             </div>
           </div>
         <% elsif friendship.friend == current_user %>
