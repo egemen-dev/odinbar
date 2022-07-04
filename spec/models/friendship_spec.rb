@@ -6,27 +6,28 @@ RSpec.describe Friendship, type: :model do
   end
 
   describe "Associations with Friend" do
-    it { should belong_to(:friend).class_name('User') }
+    it { should belong_to(:friend).class_name('User').without_validating_presence }
   end
 
   it 'is valid with valid attributes' do
-    friend = FactoryBot.build(:user, email: 'abctest@gmail.com', username: 'test', id: 2)
-    example_friendship = build(:friendship, friend: friend)
+    friend = FactoryBot.build(:user, email: 'friend@gmail.com', username: 'test', id: 1)
+    user = FactoryBot.build(:user, email: 'user@gmail.com', username: 'test', id: 2)
+    example_friendship = build(:friendship, friend: friend, user: user)
     expect(example_friendship).to be_valid
   end
 
   it 'is not valid without user_id' do
-    friendship1 = build(:friendship, user_id: nil)
+    friendship1 = FactoryBot.build(:friendship, user_id: nil)
     expect(friendship1).to_not be_valid
   end
 
   it 'is not valid without friend_id' do
-    friendship1 = build(:friendship, friend_id: nil)
+    friendship1 = FactoryBot.build(:friendship, friend_id: nil)
     expect(friendship1).to_not be_valid
   end
 
   it 'is not valid without user_id and friend_id' do
-    friendship1 = build(:friendship, friend_id: nil, user_id: nil)
+    friendship1 = FactoryBot.build(:friendship, friend_id: nil, user_id: nil)
     expect(friendship1).to_not be_valid
   end
 
