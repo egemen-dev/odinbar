@@ -5,12 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-    <link rel="stylesheet" href="app/assets/stylesheets/application.css">
+    <%= stylesheet_link_tag "application" %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <script src="app/javascript/application.js"></script> 
   </head>
 
   <body>
@@ -28,8 +24,9 @@
       <%= render "layouts/navbar" %>
       <div class="section">
         <%= yield %> 
-        <% console %>
+        <%# <% console %>
       </div>
     </div>
+    <%= javascript_include_tag 'application'%>
   </body>
 </html>
