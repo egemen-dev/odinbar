@@ -1,6 +1,6 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand p-3">
-    <%= link_to 'Odinbar', users_profile_path(current_user.id), class: 'is-size-3 has-text-weight-bold has-text-black' %>
+    <%= link_to 'Odinbar', user_signed_in? ?  users_profile_path(current_user.id) : root_path , class: 'is-size-3 has-text-weight-bold has-text-black' %>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
