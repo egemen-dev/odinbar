@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'User Sign In', type: :feature do
   before do
-    user = User.create!(username: 'rspec user', email: 'rspectester@mail.com', password: '12345678')
+    User.create!(username: 'rspec user', email: 'rspectester@mail.com', password: '12345678')
   end
 
   scenario 'by using the Devise session form.' do
