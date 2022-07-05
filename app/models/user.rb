@@ -1,14 +1,14 @@
 class User < ApplicationRecord
   # Relations
-  has_many :friendships
-  has_many :sent_requests, -> { where status: nil }, class_name: 'Friendship', foreign_key: 'user_id'
-  has_many :received_requests, -> { where status: nil }, class_name: 'Friendship', foreign_key: 'friend_id'
+  has_many :friendships, dependent: :destroy
+  has_many :sent_requests, -> { where status: nil }, class_name: 'Friendship', foreign_key: 'user_id', dependent: :destroy
+  has_many :received_requests, -> { where status: nil }, class_name: 'Friendship', foreign_key: 'friend_id', dependent: :destroy
 
   # Friend request from me and accepted by receiver user
-  has_many :acceptance_by_them, -> { where status: true }, class_name: 'Friendship', foreign_key: 'user_id'
+  has_many :acceptance_by_them, -> { where status: true }, class_name: 'Friendship', foreign_key: 'user_id', dependent: :destroy
 
   # Friend request from another user and accepted by me
-  has_many :acceptance_by_me, -> { where status: true }, class_name: 'Friendship', foreign_key: 'friend_id'
+  has_many :acceptance_by_me, -> { where status: true }, class_name: 'Friendship', foreign_key: 'friend_id', dependent: :destroy
 
   # Friends that I sent request to
   has_many :type_1_friends, through: :acceptance_by_them, source: :friend
