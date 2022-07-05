@@ -36,4 +36,20 @@ RSpec.describe Friendship, type: :model do
     friendship3 = build(:friendship, friend: user_test, user: user_test)
     expect(friendship3).to_not be_valid
   end
+
+  describe "Destruction of user" do
+    it 'all friendships of the user gets destroyed as well' do
+
+      # user2 has friendships where he's a user (seneder) and a friend (receiver)
+      user1 = FactoryBot.create(:user, email: 'user1@gmail.com', username: 'user01', id: 1)
+      user2 = FactoryBot.create(:user, email: 'user2@gmail.com', username: 'user02', id: 2)
+      user3 = FactoryBot.create(:user, email: 'user3@gmail.com', username: 'user03', id: 3)
+  
+      create(:friendship, user: user2, friend: user1, status: true)
+      create(:friendship, user: user3, friend: user2, status: true)
+
+      user2.destroy
+      expect(Friendship.all).to be_empty
+    end
+  end
 end
