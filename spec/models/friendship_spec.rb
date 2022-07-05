@@ -35,6 +35,19 @@ RSpec.describe Friendship, type: :model do
     user_test = FactoryBot.build(:user, email: 'abctest@gmail.com', username: 'test', id: 2)
     friendship3 = build(:friendship, friend: user_test, user: user_test)
     expect(friendship3).to_not be_valid
+    expect(friendship3.errors[:friendship]).to include "can't be friends with same account"
+  end
+  
+  it 'fails if user and friend already have a existed friendship' do
+    user1 = build(:user, id:1)
+    user2 = build(:user, email: 'abctest@gmail.com', username: 'test', id: 2)
+
+    # Saving a friendship to database for second_frienship to fail and raise error.
+    create(:friendship, friend: user1, user: user2)
+
+    second_friendship = build(:friendship, friend: user2, user: user1)
+    expect(second_friendship).to_not be_valid
+    expect {second_friendship.save!}.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Friendship user and friend already have a mutual friendship")
   end
 
   describe "Destruction of user" do
