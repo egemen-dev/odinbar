@@ -15,7 +15,7 @@
  */
  div.special-border {
   border: 1px solid rgb(238, 238, 238);
-  border-radius: 10px;
+  border-radius: 24px;
   box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.075);
 }
 
@@ -25,4 +25,19 @@ div.vertical-line {
   margin-left: auto;
   margin-right: auto;
   width: 1px;
+}
+
+nav.navbar {
+  position: sticky;
+  border-bottom: 1px solid rgba(212, 212, 212, 0.85);
+  top: 0px;
+}
+
+a.navbar-burger {
+  border: 1px solid rgba(212, 212, 212, 0.85);
+  border-radius: 12px;
+}
+
+div.profile-card{
+  box-shadow: 0px -1px 8px 0px rgba(0, 0, 0, 0.060);
 }
