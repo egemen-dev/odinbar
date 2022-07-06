@@ -48,13 +48,13 @@ RSpec.describe 'Friendship Spec', type: :feature do
     visit root_path
 
     # Logged in user tries to access user2's personal friendship management pages.
-    visit users_friends_path(user2.id)
+    visit user_friends_path(user2.id)
     expect(page).to have_content("You don't have a permission to see #{user2.username}'s friendships page.")
 
-    visit users_received_requests_path(user2.id)
+    visit user_received_requests_path(user2.id)
     expect(page).to have_content("You don't have a permission to see #{user2.username}'s friendship requests page.")
 
-    visit users_sent_requests_path(user2.id)
+    visit user_sent_requests_path(user2.id)
     expect(page).to have_content("You don't have a permission to see #{user2.username}'s friendship requests page.")
   end
 end

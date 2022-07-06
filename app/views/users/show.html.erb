@@ -22,21 +22,21 @@
 <% if @user == current_user %>
   <div class="container columns py-3">
     <div class="column is-4 py-0">
-      <a href="<%= users_friends_path %>">
+      <a href="<%= user_friends_path %>">
         <div class="box my-1 py-3 has-text-centered special-border">
           <p class="has-text-weight-bold">Friends: <%= @user.active_friends.count %></p>
         </div>
       </a>
     </div>
     <div class="column is-4 py-0">
-    <a href="<%= users_sent_requests_path %>">
+    <a href="<%= user_sent_requests_path %>">
       <div class="box my-1 py-3 has-text-centered special-border">
         <p class="has-text-weight-bold">Sended Requests: <%= @user.sent_requests.count %></p>
       </div>
     </a>
     </div>
     <div class="column is-4 py-0">
-    <a href="<%= users_received_requests_path %>">
+    <a href="<%= user_received_requests_path %>">
       <div class="box my-1 py-3 has-text-centered special-border">
         <p class="has-text-weight-bold">Received Requests: <%= @user.received_requests.count %></p>
       </div>

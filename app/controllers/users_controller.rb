@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   # Friendship Requests Methods
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
   end
 
   def index
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def friends
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     if @user == current_user
       @friends = current_user.active_friends
     else
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def received_requests
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     if @user == current_user
       @received_requests = current_user.received_requests
     else
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   end
 
   def sent_requests
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     if @user == current_user
       @sent_requests = current_user.sent_requests
     else

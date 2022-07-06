@@ -1,6 +1,6 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand p-3">
-    <%= link_to 'Odinbar', user_signed_in? ?  users_profile_path(current_user.id) : root_path , class: 'is-size-3 has-text-weight-bold has-text-black' %>
+    <%= link_to 'Odinbar', user_signed_in? ?  user_profile_path(current_user.id) : root_path , class: 'is-size-3 has-text-weight-bold has-text-black' %>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
@@ -11,10 +11,10 @@
   <% if user_signed_in? %>
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start has-text-centered has px-0 mx-0">
-        <%= link_to 'My profile', users_profile_path(current_user.id), class: 'navbar-item has-text-black' %>
+        <%= link_to 'My profile', user_profile_path(current_user.id), class: 'navbar-item has-text-black' %>
       </div>
       <div class="navbar-start has-text-centered">
-        <%= link_to 'All Users', users_index_path, class: 'navbar-item has-text-black' %>
+        <%= link_to 'All Users', users_path, class: 'navbar-item has-text-black' %>
       </div>
       <div class="navbar-end">
         <div class="navbar-item">
