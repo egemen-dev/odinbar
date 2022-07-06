@@ -11,17 +11,19 @@
 
   <body>
     <% flash.each do |name, msg| -%>
-      <% if name == 'error' %>
-        <%= content_tag :div, msg, class: 'notification is-danger my-0' %>
-        <% elsif name == 'notice' %>
-          <%= content_tag :div, msg, class: 'notification is-success my-0' %>
-        <% elsif name == 'alert' %>
-          <%= content_tag :div, msg, class: 'notification is-warning my-0' %>
-      <% end %>
+      <div id="flash-messages">
+        <% if name == 'error' %>
+          <%= content_tag :div, msg, class: 'notification is-danger my-0' %>
+          <% elsif name == 'notice' %>
+            <%= content_tag :div, msg, class: 'notification is-success my-0' %>
+          <% elsif name == 'alert' %>
+            <%= content_tag :div, msg, class: 'notification is-warning my-0' %>
+        <% end %>
+      </div>
     <% end %>
     
+    <%= render "layouts/navbar" %>
     <div class="container">
-      <%= render "layouts/navbar" %>
       <div class="section">
         <%= yield %> 
         <%# <% console %>
