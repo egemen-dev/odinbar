@@ -5,6 +5,8 @@ class FriendshipsController < ApplicationController
     @friendship = current_user.friendships.new(friend_id: params[:friend_id])
     if @friendship.save
       flash[:notice] = 'Friendship Request successfully created.'
+    else
+      flash[:alert] = 'Something went wrong, try again later.'
     end
     redirect_to user_sent_requests_path(current_user.id)
   end
@@ -13,8 +15,10 @@ class FriendshipsController < ApplicationController
     @friendship = set_friendship
     if @friendship.update_attribute('status', params[:status])
       flash[:notice] = 'Friendship successfully accepted.'
-      redirect_to user_friends_path(current_user.id)
+    else
+      flash[:alert] = 'Something went wrong, try again later.'
     end
+    redirect_to user_friends_path(current_user.id)
   end
 
   def destroy
@@ -22,8 +26,10 @@ class FriendshipsController < ApplicationController
     @friendship.destroy
     if @friendship.destroy
       flash[:notice] = 'Friendship successfully destroyed.'
-      redirect_to user_profile_path(current_user.id)
+    else
+      flash[:alert] = 'Something went wrong, try again later.'
     end
+    redirect_to user_profile_path(current_user.id)
   end
 
   private
