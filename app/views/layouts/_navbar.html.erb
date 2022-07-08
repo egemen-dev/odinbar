@@ -3,13 +3,13 @@
     <div class="navbar-brand p-3">
       <%= link_to 'Odinbar', user_signed_in? ?  user_profile_path(current_user.id) : root_path , class: 'is-size-3 has-text-weight-bold has-text-black' %>
 
+    <% if user_signed_in? %>
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
       </a>
     </div>
-    <% if user_signed_in? %>
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start has-text-centered has px-0 mx-0">
           <%= link_to 'My profile', user_profile_path(current_user.id), class: 'navbar-item has-text-black' %>
