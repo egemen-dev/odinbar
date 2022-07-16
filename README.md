@@ -20,3 +20,8 @@ I'll add the plans of the project.
 15. Sign in will use OmniAuth  to sign in with google.
 16. Mailer will be used to send a welcome email when a new user signs up. 
 
+## TODOS:
+* Create Post model
+* Create Like model
+* Create Comment model
+* Design Sign in & Sign up pages
