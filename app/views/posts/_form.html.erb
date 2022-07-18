@@ -1,0 +1,19 @@
+<%= form_with model: @post do |form| %>
+  <div class="columns is-centered">
+    <div class="column is-9"> 
+      <div class="card mb-4 px-0 pb-2 special-border">
+        <div class="card-content mx-0 px-0 mt-3 pt-5 pb-3">
+          <%= form.text_area :body, class:'textarea has-fixed-size', placeholder: "What's happening?" %>
+          <% @post.errors.full_messages_for(:body).each do |message| %>
+            <div><%= message %></div>
+          <% end %>
+        </div>
+        <% if @post.user == current_user || @post.user.nil? %>
+          <div class="buttons is-flex-direction-row-reverse px-4 py-2">
+            <%= form.submit class: "button is-link is-inverted" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

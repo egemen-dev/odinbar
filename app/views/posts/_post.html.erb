@@ -1,0 +1,42 @@
+ <% if @post.nil? %>
+  <% @post = post %>
+ <% end %>
+
+ <div class="columns is-centered">
+  <div class="column is-9">
+    <div class="card mb-2 px-3 pb-5 special-border">
+      <div class="card-content pb-0">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <img src="https://bulma.io/images/placeholders/96x96.png" class="is-rounded" alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4"><a href="<%= user_profile_path(@post.user) %>"><%= @post.user.username %></a></p>
+            <p class="subtitle is-6"><%= @post.user.email %></p>
+          </div>
+        </div>
+
+        <div class="content p-0 m-0">
+          <a href="<%= post_path(@post) %>"><p class="is-size-4 p-0 m-0 has-text-dark"><%= @post.body %></p></a>
+          <br>
+          <% if @post.created_at == @post.updated_at %>
+            <small><time datetime="<%= @post.created_at.strftime("%d/%m/%Y - %k:%M") %>">Posted <%= time_ago_in_words(@post.created_at) %> ago</time></small>
+          <% else %>
+            <small><time datetime="<%= @post.created_at.strftime("%d/%m/%Y - %k:%M") %>">Updated <%= time_ago_in_words(@post.updated_at) %> ago</time></small>
+          <% end %>
+        </div>
+        <div class="buttons is-flex-direction-row-reverse">
+          <% if @post.user == current_user %>
+            <%= link_to "Edit Post", edit_post_path(@post), class:'button is-link is-inverted' %>
+            <%= button_to 'Delete', {:controller => "posts", :action => "destroy", id: @post.id}, :method=>:delete, class: 'button is-danger is-inverted' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%# Empty the class variable, otherwise partial doesn't work as intended. %>
+<% @post = nil %>
