@@ -3,12 +3,14 @@ Rails.application.routes.draw do
   devise_for :users
   
   resources :friendships, only: [:create, :update, :destroy]
+  resources :posts
 
   resources :users, only: [:index] do
     get 'show', :as => :profile
     get 'friends'
     get 'received_requests'
     get 'sent_requests'
+    get 'post'
   end
 
   # get 'users/all' => 'users#index', :as => :users_index
