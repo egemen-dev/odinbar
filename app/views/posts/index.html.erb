@@ -1,0 +1,12 @@
+<p class="is-size-4 has-text-centered has-text-weight-bold">Flow</p>
+<div class="pt-5">
+  <% if @posts.empty? %>
+    <p class="is-size-5 has-text-centered">Flow is empty.</p>
+  <% else %>
+    <% @posts.each do |post| %>
+    <div class="pt-0">
+      <%= render "posts/post", post: post %>
+    </div>
+    <% end %>
+  <% end %>
+</div>
