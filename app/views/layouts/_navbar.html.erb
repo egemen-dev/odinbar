@@ -11,11 +11,20 @@
       </a>
     </div>
       <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start has-text-centered has px-0 mx-0">
+        <div class="navbar-start has-text-centered px-0 mx-0">
           <%= link_to 'My profile', user_profile_path(current_user.id), class: 'navbar-item has-text-black' %>
         </div>
-        <div class="navbar-start has-text-centered">
+        <div class="navbar-start has-text-centered px-0 mx-0">
+          <%= link_to 'Edit', edit_user_registration_path, class: 'navbar-item has-text-black' %>
+        </div>
+        <div class="navbar-start has-text-centered px-0 mx-0">
+          <%= link_to 'New Post', new_post_path, class: 'navbar-item has-text-black' %>
+        </div>
+        <div class="navbar-start has-text-centered px-0 mx-0">
           <%= link_to 'All Users', users_path, class: 'navbar-item has-text-black' %>
+        </div>
+        <div class="navbar-start has-text-centered px-0 mx-0">
+          <%= link_to 'Flow', posts_path, class: 'navbar-item has-text-black' %>
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
