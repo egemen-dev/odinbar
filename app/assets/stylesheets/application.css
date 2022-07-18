@@ -121,3 +121,9 @@ input:focus {
   color: var(--textLight);
   margin-right: 1rem;
 }
+
+/* Post body text wrap */
+p {
+  word-break: break-all;
+  white-space: normal;
+}
