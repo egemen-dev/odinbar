@@ -2,6 +2,7 @@ class User < ApplicationRecord
   # Relations
   has_many :posts, dependent: :destroy
   has_many :friendships, dependent: :destroy
+  has_many :notifications, dependent: :destroy
   has_many :sent_requests, -> { where status: nil }, class_name: 'Friendship', foreign_key: 'user_id', dependent: :destroy
   has_many :received_requests, -> { where status: nil }, class_name: 'Friendship', foreign_key: 'friend_id', dependent: :destroy
 
