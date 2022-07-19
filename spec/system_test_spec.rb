@@ -74,6 +74,11 @@ RSpec.describe 'User Actions', type: :system do
       expect(page).to have_content('Decline')
       click_on 'Accept'
       expect(page).to have_content('Friendship successfully accepted.')
+      
+      # Open visit_notifications_path and delete all
+      click_on 'Notifications (1)'
+      click_on 'Delete All'
+      expect(page).to have_content('All the notifications are deleted.')
     end
   end
 
