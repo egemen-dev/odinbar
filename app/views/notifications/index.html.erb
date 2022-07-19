@@ -1,0 +1,23 @@
+ <div class="columns is-centered is-tablet">
+  <div class="column is-7">
+  <% if current_user.notifications.count.zero? %>
+    <p class="is-size-5 has-text-centered">You have no notifications.</p>
+  <% else %>
+    <div class="buttons is-flex-direction-row-reverse">
+      <%= button_to 'Delete All', {:controller => "notifications", :action => "destroy_all"}, :method=>:delete, class: 'button is-rounded' %>
+    </div>
+  <% end %>
+    <% @notifications.reverse.each do |notif| %>
+        <% if notif.body.include?('new') %>
+          <a href="<%= user_received_requests_path(current_user) %>">
+        <% else %>
+          <a href="<%= user_friends_path(current_user) %>">
+        <% end %>
+            <div class="box my-3 py-2 has-text-centered special-border">
+              <p class="has-text-weight-bold"><%= notif.body %></p>
+              <p><%= time_ago_in_words(notif.created_at) %> ago</p>
+            </div>
+          </a>
+    <% end %>
+  </div>
+</div>
