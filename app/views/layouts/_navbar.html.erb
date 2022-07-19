@@ -26,6 +26,9 @@
         <div class="navbar-start has-text-centered px-0 mx-0">
           <%= link_to 'Flow', posts_path, class: 'navbar-item has-text-black' %>
         </div>
+        <div class="navbar-start has-text-centered px-0 mx-0">
+          <%= link_to "Notifications #{"(#{current_user.notifications.count})" unless current_user.notifications.count.zero?}", notifications_path, class: 'navbar-item has-text-black' %>
+        </div>
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="has-text-centered">
