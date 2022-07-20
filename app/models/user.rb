@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   # Relations
   has_many :posts, dependent: :destroy
+  has_many :post_likings, dependent: :destroy
+  has_many :liked_posts, through: :post_likings, source: :post
   has_many :friendships, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :sent_requests, -> { where status: nil }, class_name: 'Friendship', foreign_key: 'user_id', dependent: :destroy
