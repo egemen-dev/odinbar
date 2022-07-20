@@ -33,11 +33,13 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    # Only allow to delete if post belongs to current user
     @post = Post.find(params[:id])
-    @post.destroy
-    flash[:notice] = 'Post successfully deleted.'
-
-    redirect_to root_path, status: :see_other
+    if @post.user == current_user
+      @post.destroy
+      flash[:notice] = 'Post successfully deleted.'
+      redirect_to root_path, status: :see_other
+    end
   end
 
   def edit
