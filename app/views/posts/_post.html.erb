@@ -28,6 +28,12 @@
           <% end %>
         </div>
         <div class="buttons is-flex-direction-row-reverse">
+          <% if @post.user_likes.include?(current_user) %>
+            <div><span class="material-symbols-outlined">favorite</span></div>
+            <%= button_to "Like (#{@post.user_likes.count})", {:controller => "post_likings", :action => "destroy", id: @post.id}, :method=>:delete, class: 'button is-link is-inverted' %>
+          <% else %>
+            <%= button_to "Like (#{@post.user_likes.count})", {:controller => "post_likings", :action => "create", post_id: @post.id}, :method=>:post, class: 'button is-link is-inverted' %>
+          <% end %>
           <% if @post.user == current_user %>
             <%= link_to "Edit Post", edit_post_path(@post), class:'button is-link is-inverted' %>
             <%= button_to 'Delete', {:controller => "posts", :action => "destroy", id: @post.id}, :method=>:delete, class: 'button is-danger is-inverted' %>
