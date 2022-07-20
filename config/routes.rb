@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   
   resources :friendships, only: [:create, :update, :destroy]
   resources :posts
+  resources :post_likings, only: [:create, :destroy]
+
   get 'notifications' => 'notifications#index'
   delete 'destroy_notifications' => 'notifications#destroy_all'
 
