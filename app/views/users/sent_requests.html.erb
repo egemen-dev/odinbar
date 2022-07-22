@@ -1,6 +1,11 @@
 <div class="container py-4 m-1 has-text-centered">
   <p class="is-size-4 has-text-weight-bold">Sent Requests</p>
 </div>
+
+<% if @sent_requests.empty? %>
+  <p class="is-size-5 has-text-centered">You have no pending sent friendship requests yet.</p>
+<% end %>
+
 <div class="columns is-centered">
   <div class="column is-7">
   <% @sent_requests.each do |friendship| %> 
