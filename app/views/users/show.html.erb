@@ -54,29 +54,34 @@
         <% if current_user.active_friends.include?(@user) %>
         <div class="columns px-0">
           <div class="column column is-4 is-offset-8">
-            <%= button_to 'Unfriend', {:controller => "friendships", :action => "destroy", id: friendship.id} , :method=>:delete, class: 'button is-danger is-light is-fullwidth' %>
+            <%= button_to 'Unfriend', {:controller => "friendships", :action => "destroy", id: friendship.id},
+             :method=>:delete, class: 'button is-danger is-light is-fullwidth' %>
           </div>
         </div>
         <% elsif friendship.user == current_user %>
           <div class="columns px-0">
             <div class="column column is-4 is-offset-8">
-            <%= button_to 'Cancel Request', {:controller => "friendships", :action => "destroy", id: friendship.id} , :method=>:delete, class: 'button is-warning is-light is-fullwidth' %>
+            <%= button_to 'Cancel Request', {:controller => "friendships", :action => "destroy", id: friendship.id},
+             :method=>:delete, class: 'button is-warning is-light is-fullwidth' %>
             </div>
           </div>
         <% elsif friendship.friend == current_user %>
           <div class="columns px-0 is-mobile">
             <div class="column is-half pb-0">
-              <%= button_to 'Decline', {:controller => "friendships", :action => "destroy", id: friendship.id}, :method=>:delete, class: 'button is-danger is-light is-fullwidth' %>
+              <%= button_to 'Decline', {:controller => "friendships", :action => "destroy", id: friendship.id},
+               :method=>:delete, class: 'button is-danger is-light is-fullwidth' %>
             </div>
             <div class="column is-half ">
-              <%= button_to 'Accept', {:controller => "friendships", :action => "update", :status => true, id: friendship.id}, :method=>:patch, class: 'button is-success is-fullwidth' %>
+              <%= button_to 'Accept', {:controller => "friendships", :action => "update", :status => true, id: friendship.id},
+               :method=>:patch, class: 'button is-success is-fullwidth' %>
             </div>
           </div>
         <% end %>
       <% elsif @user != current_user %>
           <div class="columns px-0">
             <div class="column column is-4 is-offset-8">
-              <%= button_to 'Send Request', {:controller => "friendships", :action => "create", :status => nil, friend_id: @user.id}, :method=>:post, class: 'button is-link is-light is-fullwidth' %>
+              <%= button_to 'Send Request', {:controller => "friendships", :action => "create", :status => nil, friend_id: @user.id},
+               :method=>:post, class: 'button is-link is-light is-fullwidth' %>
             </div>
           </div>        
       <% end %>

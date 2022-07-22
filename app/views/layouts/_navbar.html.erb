@@ -1,7 +1,11 @@
+<% content_for :head do %>
+  <%= javascript_import_module_tag "navbar" %>
+<% end %>
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="container">
     <div class="navbar-brand p-3">
-      <%= link_to 'Odinbar', user_signed_in? ?  user_profile_path(current_user.id) : root_path , class: 'is-size-3 has-text-weight-bold has-text-black' %>
+      <%= link_to 'Odinbar', user_signed_in? ?  user_profile_path(current_user.id) : root_path ,
+       class: 'is-size-3 has-text-weight-bold has-text-black' %>
 
     <% if user_signed_in? %>
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -12,39 +16,70 @@
     </div>
       <div id="navbarBasicExample" class="navbar-menu has-text-centered">
         <div class="navbar-start has-text-centered px-0 mx-0">
-          <%= link_to user_profile_path(current_user.id), class: 'navbar-item has-text-black' do %>
-            <small><p class="is-flex columns is-centered is-vcentered py-3 px-4"><span class="material-symbols-outlined pr-2">account_circle</span>My profile</p></small>
+          <%= link_to user_profile_path(current_user.id), class: 'navbar-item has-text-black', id:'my-profile' do %>
+            <small>
+              <p class="is-flex columns is-centered is-vcentered py-3 px-4">
+                <span class="material-symbols-outlined pr-2">account_circle</span>
+                My profile
+              </p>
+            </small>
           <% end %>
         </div>
         <div class="navbar-start has-text-centered px-0 mx-0">
-          <%= link_to edit_user_registration_path, class: 'navbar-item has-text-black' do %>
-            <small><p class="is-flex columns is-centered is-vcentered py-3 px-4"><span class="material-symbols-outlined pr-2">manage_accounts</span>Edit</p></small>
+          <%= link_to edit_user_registration_path, class: 'navbar-item has-text-black', id:'edit' do %>
+            <small>
+              <p class="is-flex columns is-centered is-vcentered py-3 px-4">
+                <span class="material-symbols-outlined pr-2">manage_accounts</span>
+                Edit
+              </p>
+            </small>
           <% end %>
         </div>
         <div class="navbar-start has-text-centered px-0 mx-0">
-          <%= link_to users_path, class: 'navbar-item has-text-black' do %>
-            <small><p class="is-flex columns is-centered is-vcentered py-3 px-4"><span class="material-symbols-outlined pr-2">groups</span>All Users</p></small>
+          <%= link_to users_path, class: 'navbar-item has-text-black', id:'all-users' do %>
+            <small>
+              <p class="is-flex columns is-centered is-vcentered py-3 px-4">
+                <span class="material-symbols-outlined pr-2">groups</span>
+                All Users
+              </p>
+            </small>
           <% end %>
         </div>
         <div class="navbar-start has-text-centered px-0 mx-0">
-          <%= link_to posts_path, class: 'navbar-item has-text-black' do %>
-            <small><p class="is-flex columns is-centered is-vcentered py-3 px-4"><span class="material-symbols-outlined pr-2">dynamic_feed</span>Flow</p></small>
+          <%= link_to posts_path, class: 'navbar-item has-text-black', id:'flow' do %>
+            <small>
+              <p class="is-flex columns is-centered is-vcentered py-3 px-4">
+                <span class="material-symbols-outlined pr-2">dynamic_feed</span>
+                Flow
+              </p>
+            </small>
           <% end %>          
         </div>
         <div class="navbar-start has-text-centered px-0 mx-0">
-          <%= link_to notifications_path, class: 'navbar-item has-text-black' do %>
-            <small><p class="is-flex columns is-centered is-vcentered py-3 px-4"><span class="material-symbols-outlined pr-2">notifications</span>Notifications <%= "(#{current_user.notifications.count})" unless current_user.notifications.count.zero? %></p></small>
+          <%= link_to notifications_path, class: 'navbar-item has-text-black', id:'notifications' do %>
+            <small>
+              <p class="is-flex columns is-centered is-vcentered py-3 px-4">
+                <span class="material-symbols-outlined pr-2">notifications</span>
+                Notifications<%= " (#{current_user.notifications.count})" unless current_user.notifications.count.zero? %>
+              </p>
+            </small>
           <% end %>    
         </div>
         <div class="navbar-start has-text-centered px-0 mx-0">
-          <%= link_to new_post_path, class: 'navbar-item has-text-black' do %>
-            <small><p class="is-flex columns is-centered is-vcentered py-3 px-4"><span class="material-symbols-outlined pr-2">edit</span>New Post</p></small>
+          <%= link_to new_post_path, class: 'navbar-item has-text-black', id:'new-post' do %>
+            <small>
+              <p class="is-flex columns is-centered is-vcentered py-3 px-4">
+                <span class="material-symbols-outlined pr-2">edit</span>
+                New Post
+              </p>
+            </small>
           <% end %>          
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="has-text-centered">
-              <%= button_to 'Log out', destroy_user_session_path, method: :delete, class: "button is-dark is-outlined" %>
+              <%= button_to 'Log out', destroy_user_session_path, method: :delete,
+               class: "button is-dark is-outlined", id:'log-out' %>
             </div>
           </div>
         </div>

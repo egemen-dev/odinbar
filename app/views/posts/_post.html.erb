@@ -4,7 +4,7 @@
 
  <div class="columns is-centered">
   <div class="column is-9">
-    <div class="card mb-2 px-3 pb-5 special-border">
+    <div class="card mb-1 px-2 pb-1 special-border">
       <div class="card-content pb-0">
         <div class="media">
           <div class="media-left">
@@ -22,21 +22,33 @@
           <a href="<%= post_path(@post) %>"><p class="is-size-4 p-0 m-0 has-text-dark"><%= @post.body %></p></a>
           <br>
           <% if @post.created_at == @post.updated_at %>
-            <small><time datetime="<%= @post.created_at.strftime("%d/%m/%Y - %k:%M") %>">Posted <%= time_ago_in_words(@post.created_at) %> ago</time></small>
+            <small>
+              <time datetime="<%= @post.created_at.strftime("%d/%m/%Y - %k:%M") %>">Posted 
+                <%= time_ago_in_words(@post.created_at) %> ago</time>
+            </small>
           <% else %>
-            <small><time datetime="<%= @post.created_at.strftime("%d/%m/%Y - %k:%M") %>">Updated <%= time_ago_in_words(@post.updated_at) %> ago</time></small>
+            <small>
+              <time datetime="<%= @post.created_at.strftime("%d/%m/%Y - %k:%M") %>">Updated 
+              <%= time_ago_in_words(@post.updated_at) %> ago</time>
+            </small>
           <% end %>
         </div>
-        <div class="buttons is-flex-direction-row-reverse">
+        <div class="buttons are-small is-flex-direction-row-reverse">
           <% if @post.user_likes.include?(current_user) %>
-            <div><span class="material-symbols-outlined">favorite</span></div>
-            <%= button_to "Like (#{@post.user_likes.count})", {:controller => "post_likings", :action => "destroy", id: @post.id}, :method=>:delete, class: 'button is-link is-inverted' %>
+            <div class="p-0 m-0"><span class="material-symbols-outlined">favorite</span></div>
+            <%= button_to "Like (#{@post.user_likes.count})",
+             {:controller => "post_likings", :action => "destroy", id: @post.id},
+              :method=>:delete, class: 'button is-link is-inverted px-1 has-text-weight-bold' %>
           <% else %>
-            <%= button_to "Like (#{@post.user_likes.count})", {:controller => "post_likings", :action => "create", post_id: @post.id}, :method=>:post, class: 'button is-link is-inverted' %>
+            <%= button_to "Like (#{@post.user_likes.count})",
+             {:controller => "post_likings", :action => "create", post_id: @post.id},
+              :method=>:post, class: 'button is-link is-inverted px-1 has-text-weight-bold' %>
           <% end %>
           <% if @post.user == current_user %>
-            <%= link_to "Edit Post", edit_post_path(@post), class:'button is-link is-inverted' %>
-            <%= button_to 'Delete', {:controller => "posts", :action => "destroy", id: @post.id}, :method=>:delete, class: 'button is-danger is-inverted' %>
+            <%= link_to "Edit Post", edit_post_path(@post),
+              class:'button is-link is-inverted px-1 has-text-weight-bold' %>
+            <%= button_to 'Delete', {:controller => "posts", :action => "destroy", id: @post.id},
+             :method=>:delete, class: 'button is-danger is-inverted px-1 has-text-weight-bold' %>
           <% end %>
         </div>
       </div>

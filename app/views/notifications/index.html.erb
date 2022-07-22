@@ -4,7 +4,8 @@
     <p class="is-size-5 has-text-centered">You have no notifications.</p>
   <% else %>
     <div class="buttons is-flex-direction-row-reverse">
-      <%= button_to 'Delete All', {:controller => "notifications", :action => "destroy_all"}, :method=>:delete, class: 'button is-rounded' %>
+      <%= button_to 'Delete All', {:controller => "notifications", :action => "destroy_all"},
+       :method=>:delete, class: 'button is-rounded' %>
     </div>
   <% end %>
     <% @notifications.reverse.each do |notif| %>

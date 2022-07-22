@@ -23,7 +23,8 @@
       <% friendship = current_user.friendship_with(user) %>
         <div class="columns px-5">
           <div class="column">
-            <%= button_to 'Unfriend', {:controller => "friendships", :action => "destroy", id: friendship.id} , :method=>:delete, class: 'button is-danger is-light is-fullwidth' %>
+            <%= button_to 'Unfriend', {:controller => "friendships", :action => "destroy",
+             id: friendship.id}, :method=>:delete, class: 'button is-danger is-light is-fullwidth' %>
           </div>
         </div>
     </div>
