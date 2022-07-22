@@ -8,6 +8,8 @@ RSpec.describe 'User Sign Up', type: :feature do
     fill_in 'Password', with: '123456'
     fill_in 'user_password_confirmation', with: '123456'
     click_on 'Sign up'
-    expect(page).to have_content('Welcome! You have signed up successfully.')
+
+    # Gets redirected to flow page
+    expect(page).to have_content('Flow')
   end
 end

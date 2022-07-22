@@ -10,6 +10,8 @@ RSpec.describe 'User Sign In', type: :feature do
     fill_in 'Email', with: 'rspectester@mail.com'
     fill_in 'Password', with: '12345678'
     click_on 'Log in'
-    expect(page).to have_content('Signed in successfully.')
+
+    # Gets redirected to flow page
+    expect(page).to have_content('Flow')
   end
 end

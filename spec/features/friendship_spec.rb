@@ -9,13 +9,15 @@ RSpec.describe 'Friendship Spec', type: :feature do
     click_on 'All Users'
     click_on 'user1'
     click_on 'Send Request'
-    expect(page).to have_content('Friendship Request successfully created.')
+    expect(page).to have_content('user1')
     click_on 'user1'
     click_on 'Cancel Request'
-    expect(page).to have_content('Friendship successfully destroyed.')
+    click_on 'my-profile'
+    click_on 'Sended Requests'
+    expect(page).not_to have_content('user1')
   end
 
-  scenario 'a user sends friendship requests to another user and receiver accepts the request' do
+  scenario 'send friendship requests to a user and receiver gets a notification and accepts the request' do
     login_as(FactoryBot.create(:user))
     user2 = FactoryBot.create(:user, email: 'user1@mail.com', username: 'Michael')
 
@@ -23,15 +25,21 @@ RSpec.describe 'Friendship Spec', type: :feature do
     click_on 'All Users'
     click_on 'Michael'
     click_on 'Send Request'
-    expect(page).to have_content('Friendship Request successfully created.')
+    expect(page).to have_content('Michael')
 
     visit root_path
     click_on 'Log out'
     expect(page).to have_content('You need to sign in or sign up before continuing.')
 
     # Switching account to accept the friendship request.
+
+    # Go to Notifications
     login_as(user2)
     visit root_path
+    click_on 'Notifications (1)'
+    expect(page).to have_content("You have a new friendship request from TesterJoe")
+    click_on 'Delete All'
+
     click_on 'My profile'
     expect(page).to have_content('Michael')
     click_on 'Received Requests: 1'
@@ -39,7 +47,9 @@ RSpec.describe 'Friendship Spec', type: :feature do
     click_on 'TesterJoe'
     expect(page).to have_content('Decline')
     click_on 'Accept'
-    expect(page).to have_content('Friendship successfully accepted.')
+    click_on 'my-profile'
+    click_on 'Friends'
+    expect(page).to have_content('TesterJoe')
   end
 
   scenario 'logged in (but unauthorized) user tries to display pages and gets redirected' do
