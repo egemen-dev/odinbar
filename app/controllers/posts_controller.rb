@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @post = Post.find(params[:id])
+    @post = set_post
   end
 
   def index
@@ -25,7 +25,6 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
-      flash[:notice] = 'Post successfully created.'
       redirect_to posts_path
     else
       render :new, status: :unprocessable_entity
@@ -34,25 +33,23 @@ class PostsController < ApplicationController
 
   def destroy
     # Only allow to delete if post belongs to current user
-    @post = Post.find(params[:id])
+    @post = set_post
     if @post.user == current_user
       @post.destroy
-      flash[:notice] = 'Post successfully deleted.'
       redirect_to root_path, status: :see_other
     end
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @post = set_post
   end
 
   def update
-    @post = Post.find(params[:id])
+    @post = set_post
     # Only allow post owner to edit
     if @post.user == current_user
       if @post.update(post_params)
         redirect_to @post
-        flash[:notice] = 'Post successfully updated.'
       else
         render :edit, status: :unprocessable_entity
       end
@@ -62,6 +59,10 @@ class PostsController < ApplicationController
   private
     def post_params
       params.require(:post).permit(:body)
+    end
+
+    def set_post
+      @post = Post.find(params[:id])
     end
 end
 

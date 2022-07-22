@@ -7,7 +7,6 @@ class NotificationsController < ApplicationController
 
   def destroy_all
     if current_user.notifications.destroy_all
-      flash[:notice] = 'All the notifications are deleted.'
       redirect_to posts_path
     end
   end
