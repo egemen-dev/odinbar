@@ -125,7 +125,7 @@ input:focus {
 }
 
 /* Post body text wrap */
-p {
+div {
   word-break: break-all;
   white-space: normal;
 }
