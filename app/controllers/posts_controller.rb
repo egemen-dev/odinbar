@@ -6,16 +6,7 @@ class PostsController < ApplicationController
   end
 
   def index
-      @posts = []
-      current_user.active_friends.each do |friend|
-        Post.where(user: friend).each do |post|
-          @posts << post
-        end     
-      end
-      current_user.posts.each do |post|
-        @posts << post
-      end
-      @posts = @posts.sort_by(&:created_at).reverse
+      @posts = Post.includes(:post_likings, :user).last(100).reverse
   end
 
   def new
@@ -62,7 +53,7 @@ class PostsController < ApplicationController
     end
 
     def set_post
-      @post = Post.find(params[:id])
+      @post = Post.includes(:user, :user_likes).find(params[:id])
     end
 end
 

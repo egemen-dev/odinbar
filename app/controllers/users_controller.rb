@@ -3,11 +3,11 @@ class UsersController < ApplicationController
 
   # Friendship Requests Methods
   def show
-    @user = User.find(params[:user_id])
+    @user = User.includes(:posts, :sent_requests, :received_requests).find(params[:user_id])
   end
 
   def index
-    @users = User.all
+    @users = User.includes(:friendships).all
   end
 
   def friends
