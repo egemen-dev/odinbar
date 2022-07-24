@@ -4,10 +4,12 @@
     <p class="is-size-5 has-text-centered">Flow is empty.</p>
   <% else %>
     <% @posts.each do |post| %>
-      <%= turbo_frame_tag "post_#{post.id}" do %>
-        <div class="pt-0">
-          <%= render "posts/post", post: post %>
-        </div>
+      <% if current_user.active_friends.include?(post.user) || post.user == current_user %>
+        <%= turbo_frame_tag "post_#{post.id}" do %>
+          <div class="pt-0">
+            <%= render "posts/post", post: post %>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
