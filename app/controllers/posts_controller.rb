@@ -6,7 +6,17 @@ class PostsController < ApplicationController
   end
 
   def index
-      @posts = Post.includes(:post_likings, :user).last(100).reverse
+    # Returns all posts of all the current_user’s friends along with the curren_user’s post.
+    @posts = []
+    current_user.active_friends.each do |friend|
+      Post.where(user: friend).each do |post|
+        @posts << post
+      end     
+    end
+    current_user.posts.each do |post|
+      @posts << post
+    end
+    @posts = @posts.sort_by(&:created_at).reverse
   end
 
   def new
