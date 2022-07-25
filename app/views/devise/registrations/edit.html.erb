@@ -5,7 +5,22 @@
     <h2 class="title is-4 has-text-centered">Edit <%= resource_name.to_s.humanize %></h2>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <div class="has-text-centered"><%= render "devise/shared/error_messages", resource: resource %></div>
-        
+
+        <p class="title is-6 pb-0 is-hidden"><%= f.label :avatar %></p>
+
+        <div class="columns is-mobile is-centered pt-4">
+          <div class="circular--portrait">
+          <% if current_user.avatar.attached? %>
+            <%= image_tag current_user.avatar %>
+          <% else %>
+            <%= image_tag('egg.jpg') %>
+          <% end %>
+          </div>  
+        </div>
+        <div class="field pt-4">
+          <%= f.file_field :avatar %>
+        </div>
+
         <div class="field pt-4">
           <%= f.text_field :username, autofocus: true, class:"input is-medium", placeholder:"Username" %>
         </div>
