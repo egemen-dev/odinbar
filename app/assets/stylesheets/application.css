@@ -14,9 +14,13 @@
  *= require_self
  */
  div.special-border {
-  border: 1px solid rgb(212, 212, 212);
+  border: 1px solid rgb(211, 211, 211);
   border-radius: 30px;
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.00);
+}
+
+.top-line{
+  border-top: 1px solid rgba(0, 0, 0, 0.12)
 }
 
 div.vertical-line {
@@ -134,3 +138,37 @@ div {
   border: 1px solid rgb(0, 47, 255);
   display: block;
 } */
+
+/* Make profile images circle */
+.circular--portrait { 
+  position: relative; 
+  width: 200px; 
+  height: 200px; 
+  overflow: hidden; 
+  border-radius: 50%;
+  box-shadow: 0px 5px 16px 0px rgba(0, 0, 0, 0.25);
+ }
+ 
+.circular--portrait img { 
+  width: 100%; 
+  height: auto;
+}
+
+/* Small profie picture in cards*/
+.circular--small { 
+  position: relative; 
+  width: 60px; 
+  height: 60px; 
+  overflow: hidden; 
+  border-radius: 50%;
+ }
+ 
+.circular--small img { 
+  width: 100%; 
+  height: auto;
+}
+
+.heart {
+  width: 36px; 
+  height: auto;
+}
