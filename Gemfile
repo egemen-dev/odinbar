@@ -59,6 +59,9 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+
+  # N+1 warning gem
+    gem 'bullet'
 end
 
 group :development do
