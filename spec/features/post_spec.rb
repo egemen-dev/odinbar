@@ -21,7 +21,7 @@ RSpec.describe 'Post Spec', type: :feature do
     # Edit false post
     click_on 'This is odinbar!'
     expect(page).to have_content('This is odinbar!')
-    click_on 'Edit Post'
+    click_on 'Edit'
     find_field(id: 'post_body_trix_input_post_1', type: :hidden).set('  ')
     click_on 'Update Post'
     expect(page).to have_content("Body can't be blank")
@@ -30,7 +30,7 @@ RSpec.describe 'Post Spec', type: :feature do
     click_on 'Flow'
     click_on 'This is odinbar!'
     expect(page).to have_content('This is odinbar!')
-    click_on 'Edit Post'
+    click_on 'Edit'
     find_field(id: 'post_body_trix_input_post_1', type: :hidden).set('This post is EDITED!!!')
     click_on 'Update Post'
     expect(page).to have_content('This post is EDITED!!!')
@@ -38,12 +38,12 @@ RSpec.describe 'Post Spec', type: :feature do
     # Like post
     click_on 'This post is EDITED!!!'
     click_on 'Like'
-    expect(page).to have_content('Like (1)')
+    expect(page).to have_content('1 like')
 
     # Dislike post
     click_on 'This post is EDITED!!!'
-    click_on 'Like (1)'
-    expect(page).to have_content('Like (0)')
+    click_on 'Unlike'
+    expect(page).to have_content('0 likes')
 
     # Delete post
     click_on 'Flow'
