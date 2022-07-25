@@ -5,53 +5,69 @@
  <div class="columns is-centered">
   <div class="column is-9">
     <div class="card mb-1 px-2 pb-1 special-border">
-      <div class="card-content pb-0">
+      <div class="card-content pb-0 px-4">
         <div class="media">
           <div class="media-left">
-            <figure class="image is-48x48">
-              <img src="https://bulma.io/images/placeholders/96x96.png" class="is-rounded" alt="Placeholder image">
-            </figure>
+            <div class="circular--small">
+            <% if @post.user.avatar.attached? %>
+              <%= image_tag @post.user.avatar %>
+            <% else %>
+              <%= image_tag('egg.jpg') %>
+            <% end %>
+            </div>  
           </div>
           <div class="media-content">
             <p class="title is-4">
-              <a href="<%= user_profile_path(@post.user) %>", data-turbo-frame="_top">
+              <a href="<%= user_profile_path(@post.user) %>", data-turbo-frame="_top", class="has-text-dark">
                 <%= @post.user.username %>
               </a>
             </p>
             <p class="subtitle is-6"><%= @post.user.email %></p>
           </div>
         </div>
-
         <div class="content p-1 m-0">
-          <a href="<%= post_path(@post) %>", data-turbo-frame="_top">
-            <p class="is-size-4 p-0 m-0 has-text-dark"><%= @post.body %></p>
+          <a href='<%= post_path(@post) %>', id='<%= @post.id %>', data-turbo-frame="_top", class="has-text-dark">
+            <%= @post.body %>
           </a>
           <br>
-          <% if @post.created_at == @post.updated_at %>
-            <small>
-              <time datetime="<%= @post.created_at.strftime("%d/%m/%Y - %k:%M") %>">Posted 
-                <%= time_ago_in_words(@post.created_at) %> ago</time>
-            </small>
-          <% else %>
-            <small>
-              <time datetime="<%= @post.created_at.strftime("%d/%m/%Y - %k:%M") %>">Updated 
-              <%= time_ago_in_words(@post.updated_at) %> ago</time>
-            </small>
-          <% end %>
+          <div class="columns is-mobile pb-3 px-2">
+            <% if @post.created_at == @post.updated_at %>
+              <div class="column p-0 m-0">
+                <small>
+                  <time datetime="<%= @post.created_at.strftime("%d/%m/%Y - %k:%M") %>">Posted 
+                    <%= time_ago_in_words(@post.created_at) %> ago</time>
+                </small>
+              </div>
+            <% else %>
+            <div class="column p-0 m-0">
+              <small>
+                <time datetime="<%= @post.created_at.strftime("%d/%m/%Y - %k:%M") %>">Updated 
+                <%= time_ago_in_words(@post.updated_at) %> ago</time>
+              </small>
+            </div>
+            <% end %>
+            <div class="columns is-mobile is-flex-direction-row-reverse p-0 m-0">
+              <div>
+                <small>
+                  <%= pluralize @post.user_likes.count, 'like' %>
+                </small>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="buttons are-small is-flex-direction-row-reverse p-1">
+        <div class="buttons is-flex-direction-row-reverse py-1 top-line">
           <% if @post.user_likes.include?(current_user) %>
-            <div class="p-0 m-0"><span class="material-symbols-outlined">favorite</span></div>
-            <%= button_to "Like (#{@post.user_likes.count})",
+            <%= image_tag 'heart.png', class:'heart pb-2' %>            
+            <%= button_to "Unlike",
              {:controller => "post_likings", :action => "destroy", id: @post.id},
               :method=>:delete, class: 'button is-link is-inverted px-1 has-text-weight-bold' %>
           <% else %>
-            <%= button_to "Like (#{@post.user_likes.count})",
+            <%= button_to "Like",
              {:controller => "post_likings", :action => "create", post_id: @post.id},
               :method=>:post, class: 'button is-link is-inverted px-1 has-text-weight-bold' %>
           <% end %>
           <% if @post.user == current_user %>
-            <%= link_to "Edit Post", edit_post_path(@post),
+            <%= link_to "Edit", edit_post_path(@post),
               class:'button is-link is-inverted px-1 has-text-weight-bold' %>
             <%= button_to 'Delete', {:controller => "posts", :action => "destroy", id: @post.id},
              :method=>:delete, class: 'button is-danger is-inverted px-1 has-text-weight-bold' %>
