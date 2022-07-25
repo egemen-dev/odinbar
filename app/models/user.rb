@@ -25,6 +25,9 @@ class User < ApplicationRecord
 
   # Users I received request from
   has_many :request_received_users, through: :received_requests, source: :user
+  
+  # User profile picture  
+  has_one_attached :avatar
 
   def active_friends
     type_1_friends | type_2_friends
