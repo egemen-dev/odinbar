@@ -3,17 +3,21 @@ class UsersController < ApplicationController
 
   # Friendship Requests Methods
   def show
-    @user = User.includes(:posts, :sent_requests, :received_requests).find(params[:user_id])
+    @user = User.eager_load(:sent_requests,:received_requests,
+                          posts: [:rich_text_body, :user_likes, :comments],
+                          avatar_attachment: :blob)
+                          .find(params[:user_id])
   end
 
   def index
-    @users = User.includes(:friendships).all
+    @users = User.includes([avatar_attachment: :blob]).all
   end
 
   def friends
     @user = User.find(params[:user_id])
     if @user == current_user
-      @friends = current_user.active_friends
+      @friends = User.includes([avatar_attachment: :blob])
+                      .find(current_user.active_friends.map(&:id))
     else
       redirect_to root_path
       flash[:alert] = "You don't have a permission to see #{@user.username}'s friendships page."
@@ -23,7 +27,9 @@ class UsersController < ApplicationController
   def received_requests
     @user = User.find(params[:user_id])
     if @user == current_user
-      @received_requests = current_user.received_requests
+      @received_requests = current_user
+                          .received_requests
+                          .includes(user: [avatar_attachment: :blob])
     else
       redirect_to root_path
       flash[:alert] = "You don't have a permission to see #{@user.username}'s friendship requests page."
@@ -33,7 +39,9 @@ class UsersController < ApplicationController
   def sent_requests
     @user = User.find(params[:user_id])
     if @user == current_user
-      @sent_requests = current_user.sent_requests
+      @sent_requests = current_user
+                      .sent_requests
+                      .includes(friend: [avatar_attachment: :blob])
     else
       redirect_to root_path
       flash[:alert] = "You don't have a permission to see #{@user.username}'s friendship requests page."

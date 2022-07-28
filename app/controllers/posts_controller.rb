@@ -6,17 +6,11 @@ class PostsController < ApplicationController
   end
 
   def index
-    # Returns all posts of all the current_user’s friends along with the curren_user’s post.
-    @posts = []
-    current_user.active_friends.each do |friend|
-      Post.where(user: friend).each do |post|
-        @posts << post
-      end     
-    end
-    current_user.posts.each do |post|
-      @posts << post
-    end
-    @posts = @posts.sort_by(&:created_at).reverse
+    @posts = Post.eager_load(:rich_text_body, :user_likes, :comments,
+                            user: [avatar_attachment: :blob])
+                            .where(user: current_user.bubble)
+                            .sort_by(&:created_at)
+                            .reverse
   end
 
   def new
@@ -63,7 +57,7 @@ class PostsController < ApplicationController
     end
 
     def set_post
-      @post = Post.includes(:user, :user_likes).find(params[:id])
+      @post = Post.eager_load(:user, :user_likes).find(params[:id])
     end
 end
 
