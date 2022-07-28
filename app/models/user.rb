@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # Relations
   has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :post_likings, dependent: :destroy
   has_many :liked_posts, through: :post_likings, source: :post
   has_many :friendships, dependent: :destroy
@@ -31,6 +32,11 @@ class User < ApplicationRecord
 
   def active_friends
     type_1_friends | type_2_friends
+  end
+
+  # Bubble is a collection of user's firends + the user itself
+  def bubble
+    (type_1_friends | type_2_friends) << self
   end
 
   def friendship_with(user)
