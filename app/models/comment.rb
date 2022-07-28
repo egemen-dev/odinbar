@@ -8,12 +8,6 @@ class Comment < ApplicationRecord
   validates :post_id, presence: true
   validates :body, presence: true, length: { in: 1..140 }
 
-  # <%= turbo_stream_from "inbox_list" %>
-  # <div id="inboxes">
-  #   <%= render @inboxes %>
-  # </div>
-  # broadcast_append_to('inbox_list', target: 'inboxes', partial: "inboxes/inbox", locals: { inbox: self })
-
   after_create_commit do
     broadcast_append_to("#{self.post_id}", target: "#{self.post_id}", partial: "posts/comments/comment", locals: { comment: self })
     broadcast_update_to("#{self.post_id}", target: "#{self.post_id}_likes_comments", partial: "posts/likesandcomments", locals: { post: self.post })

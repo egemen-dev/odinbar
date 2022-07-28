@@ -14,17 +14,17 @@
  *= require_self
  */
  div.special-border {
-  border: 1px solid rgb(211, 211, 211);
+  border: 1px solid rgb(185, 202, 211);
   border-radius: 30px;
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.00);
 }
 
 .top-line{
-  border-top: 1px solid rgba(0, 0, 0, 0.12)
+  border-top: 1px solid rgba(0, 0, 0, 0.08)
 }
 
 div.vertical-line {
-  border-left: 1px solid #a7a7a7;
+  border-left: 1px solid rgb(185, 202, 211);
   height: 40px;
   margin-left: auto;
   margin-right: auto;
@@ -33,12 +33,12 @@ div.vertical-line {
 
 nav.navbar {
   position: sticky;
-  border-bottom: 1px solid rgba(212, 212, 212);
+  border-bottom: 1px solid rgb(185, 202, 211);
   top: 0px;
 }
 
 a.navbar-burger {
-  border: 1px solid rgba(212, 212, 212, 0.85);
+  border: 1px solid rgb(185, 202, 211);
   border-radius: 12px;
 }
 
@@ -134,10 +134,10 @@ div {
   white-space: normal;
 }
 
-/* turbo-frame {
+turbo-frame {
   border: 1px solid rgb(0, 47, 255);
   display: block;
-} */
+}
 
 /* Make profile images circle */
 .circular--portrait { 
@@ -171,4 +171,13 @@ div {
 .heart {
   width: 36px; 
   height: auto;
+}
+
+/* Font size of trix content */
+.trix-content {
+  font-size: 22px;
+}
+
+.grey-font{
+  color: rgb(94, 108, 112);
 }
