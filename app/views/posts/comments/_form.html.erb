@@ -1,0 +1,10 @@
+<%= form_with model: comment, id:"form" do |form| %>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+  <%= form.hidden_field :post_id, value: @post.id %>
+  <p class="pt-2">
+    <%= form.text_field :body, placeholder: "What do you think?", class:"input is-rounded" %>
+  </p>
+  <div class="buttons is-flex-direction-row-reverse pt-2">
+    <%= form.submit class:'button is-small is-rounded is-primary' %>
+  </div>
+<% end %>

@@ -1,7 +1,7 @@
  <% if @post.nil? %>
   <% @post = post %>
  <% end %>
-
+<%= turbo_frame_tag "post_#{@post.id}" do %>
  <div class="columns is-centered">
   <div class="column is-9">
     <div class="card mb-1 px-2 pb-1 special-border">
@@ -26,51 +26,41 @@
           </div>
         </div>
         <div class="content p-1 m-0">
-          <a href='<%= post_path(@post) %>', id='<%= @post.id %>', data-turbo-frame="_top", class="has-text-dark">
+          <a href='<%= post_path(@post) %>', id='post_link_<%= @post.id %>', data-turbo-frame="_top", class="has-text-dark">
             <%= @post.body %>
           </a>
           <br>
           <div class="columns is-mobile pb-3 px-2">
-            <% if @post.created_at == @post.updated_at %>
-              <div class="column p-0 m-0">
-                <small>
-                  <time datetime="<%= @post.created_at.strftime("%d/%m/%Y - %k:%M") %>">Posted 
-                    <%= time_ago_in_words(@post.created_at) %> ago</time>
-                </small>
-              </div>
-            <% else %>
             <div class="column p-0 m-0">
-              <small>
-                <time datetime="<%= @post.created_at.strftime("%d/%m/%Y - %k:%M") %>">Updated 
+              <small class="grey-font">
+                <time datetime="<%= @post.created_at.strftime("%d/%m/%Y - %k:%M") %>">
                 <%= time_ago_in_words(@post.updated_at) %> ago</time>
               </small>
             </div>
-            <% end %>
             <div class="columns is-mobile is-flex-direction-row-reverse p-0 m-0">
-              <div>
-                <small>
-                  <%= pluralize @post.user_likes.count, 'like' %>
-                </small>
-              </div>
+              <%= render partial: "posts/likesandcomments", locals: {post: @post} %>
             </div>
           </div>
         </div>
         <div class="buttons is-flex-direction-row-reverse py-1 top-line">
-          <% if @post.user_likes.include?(current_user) %>
-            <%= image_tag 'heart.png', class:'heart pb-2' %>            
-            <%= button_to "Unlike",
-             {:controller => "post_likings", :action => "destroy", id: @post.id},
-              :method=>:delete, class: 'button is-link is-inverted px-1 has-text-weight-bold' %>
-          <% else %>
-            <%= button_to "Like",
-             {:controller => "post_likings", :action => "create", post_id: @post.id},
-              :method=>:post, class: 'button is-link is-inverted px-1 has-text-weight-bold' %>
-          <% end %>
+          <%= render partial: 'posts/likesection', locals: { post: @post } %>
+          <button id=<%="comment_button_#{@post.id}"%> class='button is-link is-inverted px-1 comments_toggle'>
+            Comment
+          </button>
           <% if @post.user == current_user %>
-            <%= link_to "Edit", edit_post_path(@post),
-              class:'button is-link is-inverted px-1 has-text-weight-bold' %>
-            <%= button_to 'Delete', {:controller => "posts", :action => "destroy", id: @post.id},
-             :method=>:delete, class: 'button is-danger is-inverted px-1 has-text-weight-bold' %>
+          <div class="dropdown <%="dropdown_#{@post.id}"%>">
+              <button class="button dropButton <%="dropdown_#{@post.id}"%>" aria-haspopup="true" aria-controls="dropdown-menu">
+                More
+              </button>
+            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+              <div class="dropdown-content">
+                <%= link_to "Edit", edit_post_path(@post),
+                  class:'dropdown-item button is-link is-inverted px-1', data: { turbo_frame: '_top' } %>
+                <%= button_to 'Delete', {:controller => "posts", :action => "destroy", id: @post.id},
+                :method=>:delete, class: 'button is-danger is-inverted px-1 dropdown-item' %>
+              </div>
+            </div>
+          </div>
           <% end %>
         </div>
       </div>
@@ -78,5 +68,23 @@
   </div>
 </div>
 
-<%# Empty the class variable, otherwise partial doesn't work as intended. %>
+
+<div class="comments comments_of_<%="#{@post.id}"%> is-hidden">
+  <div class="columns is-centered pt-0">
+    <div class="column is-9 pt-0 px-6"> 
+      <h2 class="has-text-weight-bold">Comments:</h2>
+      <%= turbo_stream_from "#{@post.id}" %>
+      <div id=<%="#{@post.id}"%>>
+        <% @post.comments.each do |comment| %>
+          <%= render partial: "posts/comments/comment", locals: { comment: comment } %>
+        <% end %>
+      </div>
+      <%# Comment form %>
+      <%= render partial: 'posts/comments/form', locals: {comment: @post.comments.build } %>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<%# Empty the instance variable, otherwise partial doesn't work as intended. %>
 <% @post = nil %>
