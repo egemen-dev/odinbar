@@ -1,0 +1,18 @@
+<%= turbo_frame_tag "likeable_post_#{post.id}" do %>
+  <% if post.user_likes.include?(current_user) %>
+  <div class="columns m-0 p-0 is-mobile">
+    <div class="column m-0 p-0">
+      <%= button_to "Unlike",
+        {:controller => "post_likings", :action => "destroy", id: post.id},
+        :method=>:delete, class: 'button is-link is-inverted px-1 likes_button', id:'likes_button' %>
+    </div>
+    <div class="column m-0 p-0 pt-1 has-text-centered">
+      <%= image_tag 'heart.png', class:'heart' %>         
+    </div>
+  </div>
+  <% else %>
+    <%= button_to "Like",
+      {:controller => "post_likings", :action => "create", post_id: post.id},
+      :method=>:post, class: 'button is-link is-inverted px-1 likes_button', id:'likes_button' %>
+  <% end %>
+<% end %>

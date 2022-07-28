@@ -1,0 +1,6 @@
+<div id=<%="#{post.id}_likes_comments"%>>
+  <small class="grey-font">
+    <%= pluralize post.user_likes.count, 'like' %> |
+    <%= pluralize post.comments.count, 'comments' %>
+  </small>
+</div>

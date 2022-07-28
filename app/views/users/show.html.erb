@@ -98,10 +98,8 @@
 <%# Post section %>
 <div class="pt-5">
   <% @user.posts.order("created_at DESC").each do |post| %>
-    <%= turbo_frame_tag "post_#{post.id}" do %>
       <div class="pt-0">
         <%= render "posts/post", post: post %>
       </div>
-    <% end %>
   <% end %>
 </div>
