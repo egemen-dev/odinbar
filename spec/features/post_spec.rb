@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Post Spec', type: :feature do
-  scenario 'Create, Edit, Like, Dislike and Delete a post.' do
+  scenario 'Create, Edit and Delete a post.' do
     login_as(FactoryBot.create(:user))
     user2 = FactoryBot.create(:user, email: 'user1@mail.com', username: 'user1')
     visit root_path
@@ -27,7 +27,7 @@ RSpec.describe 'Post Spec', type: :feature do
     expect(page).to have_content("Body can't be blank")
     
     # Edit post
-    click_on 'Flow'
+    click_on 'Back to Flow'
     click_on 'This is odinbar!'
     expect(page).to have_content('This is odinbar!')
     click_on 'Edit'
@@ -35,18 +35,8 @@ RSpec.describe 'Post Spec', type: :feature do
     click_on 'Update Post'
     expect(page).to have_content('This post is EDITED!!!')
 
-    # Like post
-    click_on 'This post is EDITED!!!'
-    click_on 'Like'
-    expect(page).to have_content('1 like')
-
-    # Dislike post
-    click_on 'This post is EDITED!!!'
-    click_on 'Unlike'
-    expect(page).to have_content('0 likes')
-
     # Delete post
-    click_on 'Flow'
+    click_on 'Back to Flow'
     expect(page).to have_content('This post is EDITED!!!')
     click_on 'This post is EDITED!!!'
     click_on 'Delete'
