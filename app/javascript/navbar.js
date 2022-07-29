@@ -20,16 +20,14 @@ function reloadToggles() {
   function toggleComments(e) {
     var comment_section = document.getElementsByClassName('comments_of_'+e.target.id.split("_")[2])[0]
     comment_section.classList.toggle('is-hidden');
-    e.target.classList.toggle('is-focused');
     e.target.classList.toggle('is-rounded');
-    console.log(comment_section);
+    // console.log(comment_section);
   }
 
   function toggleDropdown(e) {
     var dropdown_menu = e.target.parentNode
     dropdown_menu.classList.toggle('is-active');
-    e.target.classList.toggle('is-rounded');
-    console.log(dropdown_menu);
+    // console.log(dropdown_menu);
   }
 }
 reloadToggles()
@@ -44,7 +42,7 @@ for (var i=0, l=inputFields.length; i<l; i++) {
     function resetAllForms() {
       for (var i=0, l=forms.length; i<l; i++) {
         forms[i].reset()
-        console.log('reseted all forms')
+        // console.log('reseted all forms')
       }
     }
   // Wait for input to go to server
@@ -66,7 +64,7 @@ var intervalId = window.setInterval(function(){
       };
     };
   };
-  console.log('checked comment delete buttons')
+  // console.log('checked comment delete buttons')
 }, 750);
 
 navbarBurger.addEventListener('click', () => {
