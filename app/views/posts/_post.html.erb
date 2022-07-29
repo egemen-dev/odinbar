@@ -49,7 +49,7 @@
           </button>
           <% if @post.user == current_user %>
           <div class="dropdown <%="dropdown_#{@post.id}"%>">
-              <button class="button dropButton <%="dropdown_#{@post.id}"%>" aria-haspopup="true" aria-controls="dropdown-menu">
+              <button class="button is-rounded dropButton <%="dropdown_#{@post.id}"%>" aria-haspopup="true" aria-controls="dropdown-menu">
                 More
               </button>
             <div class="dropdown-menu" id="dropdown-menu" role="menu">

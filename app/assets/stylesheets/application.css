@@ -134,10 +134,10 @@ div {
   white-space: normal;
 }
 
-turbo-frame {
+/* turbo-frame {
   border: 1px solid rgb(0, 47, 255);
   display: block;
-}
+} */
 
 /* Make profile images circle */
 .circular--portrait { 

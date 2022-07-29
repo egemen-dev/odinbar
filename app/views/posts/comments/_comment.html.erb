@@ -2,7 +2,7 @@
 <a href="<%= user_profile_path(comment.user) %>", data-turbo-frame="_top", class="has-text-dark pt-2 pb-1 has-text-weight-bold">
   <%= comment.user.username %>
 </a>
-  <div class="px-1 py-0 pt-0 mx-0 columns is-justify-content-space-between py-4">
+  <div class="px-1 py-0 pt-0 mx-0 columns is-justify-content-space-between py-4 is-mobile">
     <div class="has-text-left">
       <p>
         <%= comment.body %>
