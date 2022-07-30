@@ -92,3 +92,5 @@ gem "omniauth-rails_csrf_protection"
 
 # SECRET ENV
 gem "figaro"
+
+gem "rake", "~> 13.0"
