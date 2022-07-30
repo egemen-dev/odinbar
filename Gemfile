@@ -83,7 +83,7 @@ group :test do
   gem 'database_cleaner-active_record'
 end
 
-gem 'simplecov', require: false, group: :test
+# gem 'simplecov', require: false, group: :test
 
 # Login with google acounts
 gem 'omniauth'
@@ -93,4 +93,4 @@ gem "omniauth-rails_csrf_protection"
 # SECRET ENV
 gem "figaro"
 
-gem "rake", "~> 13.0"
+# gem "rake", "~> 13.0"
