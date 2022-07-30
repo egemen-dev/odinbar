@@ -50,7 +50,7 @@ gem 'bootsnap', require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
 
-gem "ruby-vips", "~> 2.1.3"
+# gem "ruby-vips", "~> 2.1.3"
 # gem 'vips', '~> 8.11', '>= 8.11.3'
 
 group :development, :test do
