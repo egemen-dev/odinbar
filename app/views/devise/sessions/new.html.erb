@@ -25,9 +25,20 @@
           <div class="actions">
             <%= f.submit "Log in", class:"button is-block is-primary is-fullwidth is-medium" %>
           </div>
-          <br />
-          <small><%= render "devise/shared/links" %></small>
         <% end %>
+        <div class="pt-4 m-0"></div>
+        <%- if devise_mapping.omniauthable? %>
+          <%- resource_class.omniauth_providers.each do |provider| %>
+            <%= form_for "Login",
+              url: omniauth_authorize_path(resource_name, provider), 
+              method: :post,
+              data: {turbo: "false"} do |f| %>
+                <%= f.submit "Login", type: "image", src: url_for("/assets/btn_google_signin_light_normal_web.png") %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <div class="pt-1 m-0"></div>
+        <small><%= render "devise/shared/links" %></small>
       </div>
     </div>
   </div>
