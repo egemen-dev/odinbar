@@ -16,6 +16,8 @@
             <div class="circular--small">
               <% if friendship.friend.avatar.attached? %>
                 <%= image_tag friendship.friend.avatar %>
+              <% elsif friendship.friend.avatar_url %>
+                <%= image_tag friendship.friend.avatar_url %>
               <% else %>
                 <%= image_tag('egg.jpg') %>
               <% end %>

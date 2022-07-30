@@ -11,6 +11,8 @@
             <div class="circular--small">
             <% if @post.user.avatar.attached? %>
               <%= image_tag @post.user.avatar %>
+            <% elsif @post.user.avatar_url %>
+              <%= image_tag @post.user.avatar_url %>
             <% else %>
               <%= image_tag('egg.jpg') %>
             <% end %>

@@ -6,6 +6,8 @@
         <div class="circular--portrait">
           <% if @user.avatar.attached? %>
             <%= image_tag @user.avatar %>
+          <% elsif @user.avatar_url %>
+            <%= image_tag @user.avatar_url %>
           <% else %>
             <%= image_tag('egg.jpg') %>
           <% end %>
