@@ -84,3 +84,11 @@ group :test do
 end
 
 gem 'simplecov', require: false, group: :test
+
+# Login with google acounts
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection"
+
+# SECRET ENV
+gem "figaro"
