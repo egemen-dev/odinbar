@@ -1,11 +1,16 @@
-var navbarMenu = document.getElementsByClassName('navbar-menu')[0]
-var navbarBurger = document.getElementsByClassName('navbar-burger')[0]
 var current_user_id = document.cookie.split("=")[1]
 var commentDivs = document.getElementsByClassName("comments")
 var dropdButtons = document.getElementsByClassName("dropButton")
 var commentsButtons = document.getElementsByClassName('comments_toggle')
 var inputFields = document.querySelectorAll('#form input');
 var forms = document.querySelectorAll('#form');
+
+var flashMessage = document.getElementById('flash-messages')
+if (flashMessage != null) {
+  setTimeout(function removeFlash() {
+    flashMessage.remove();
+  }, 6000)
+}
 
 function reloadToggles() {
   // Comment buttons opens and hides comment section +
@@ -67,15 +72,11 @@ var intervalId = window.setInterval(function(){
   // console.log('checked comment delete buttons')
 }, 750);
 
+// Navbar burger button (mobile)
+var navbarMenu = document.getElementsByClassName('navbar-menu')[0]
+var navbarBurger = document.getElementsByClassName('navbar-burger')[0]
+
 navbarBurger.addEventListener('click', () => {
   navbarBurger.classList.toggle('is-active');
   navbarMenu.classList.toggle('is-active');
 });
-
-
-var flashMessage = document.getElementById('flash-messages')
-if (flashMessage != null) {
-  setTimeout(function removeFlash() {
-    flashMessage.remove();
-  }, 6000)
-}
