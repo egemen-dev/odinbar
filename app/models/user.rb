@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  after_create :send_welcome_mail
+
   # Relations
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -65,5 +67,10 @@ class User < ApplicationRecord
         )
     end
     user
+  end
+
+  # Mailer
+  def send_welcome_mail
+    WelcomeMailer.welcome(self).deliver
   end
 end
