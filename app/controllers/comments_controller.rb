@@ -5,10 +5,12 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.save
+    redirect_to post_path(@comment.post)
   end
 
   def destroy
     @comment.destroy if @comment.user == current_user
+    redirect_to post_path(@comment.post)
   end
 
   private

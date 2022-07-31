@@ -1,7 +1,7 @@
  <% if @post.nil? %>
   <% @post = post %>
  <% end %>
-<%= turbo_frame_tag "post_#{@post.id}" do %>
+<%# <%= turbo_frame_tag "post_#{@post.id}" do %>
  <div class="columns is-centered">
   <div class="column is-9">
     <div class="card mb-1 px-2 pb-1 special-border">
@@ -75,7 +75,7 @@
   <div class="columns is-centered pt-0">
     <div class="column is-9 pt-0 px-6"> 
       <h2 class="has-text-weight-bold">Comments:</h2>
-      <%= turbo_stream_from "#{@post.id}" %>
+      <%# <%= turbo_stream_from "#{@post.id}" %>
       <div id=<%="#{@post.id}"%>>
         <% @post.comments.each do |comment| %>
           <%= render partial: "posts/comments/comment", locals: { comment: comment } %>
@@ -86,7 +86,7 @@
     </div>
   </div>
 </div>
-<% end %>
+<%# <% end %>
 
 <%# Empty the instance variable, otherwise partial doesn't work as intended. %>
 <% @post = nil %>
