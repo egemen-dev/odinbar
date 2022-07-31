@@ -2,10 +2,10 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 
 # Users
-jack = User.create(username:"JackBarsky", email:"user1@mail.com", password:"123456", id:1000)
-micheal = User.create(username:"Michael", email:"user2@mail.com", password:"123456", id:1001)
-alex = User.create(username:"Alex", email:"user3@mail.com", password:"123456", id:1002)
-daniel = User.create(username:"Daniel", email:"user4@mail.com", password:"123456", id:1003)
+jack = User.create(username:"JackBarsky", email:"user1@exampleexample.com", password:"123456", id:1000)
+micheal = User.create(username:"Michael", email:"user2@exampleexample.com", password:"123456", id:1001)
+alex = User.create(username:"Alex", email:"user3@exampleexample.com", password:"123456", id:1002)
+daniel = User.create(username:"Daniel", email:"user4@exampleexample.com", password:"123456", id:1003)
 
 # Friendships
 Friendship.create(status: true, user:jack, friend:micheal)
