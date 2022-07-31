@@ -324,7 +324,6 @@ DEPENDENCIES
   puma (~> 5.0)
   rails (~> 7.0.3)
   rspec-rails
-  ruby-vips
   selenium-webdriver
   shoulda-matchers
   sprockets-rails
