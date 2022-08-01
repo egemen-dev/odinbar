@@ -5,8 +5,8 @@ Live demo [_here_](https://obscure-citadel-89619.herokuapp.com).
 ## General Information
 It's the one of the hardest projects I ever built so far. I learned a lot along the way, and spend quality time thinking about the database, with pen and paper on my hand before initializing this project. Most challenging part was probably setting up the friendship model between users. I really enjoyed tackling the surprising challenges while developing this app.
 
-<p align="left">
-  <img width="568" height="400" src="https://user-images.githubusercontent.com/93445248/182105453-9f4e543b-6cd8-4029-bdc2-03efa3b45cf8.gif">
+<p align="center">
+  <img width="620" height="436" src="https://user-images.githubusercontent.com/93445248/182189079-c5ec0e11-297d-45d0-9692-14a7d64c7d3a.gif">
 </p>
 
 ## Features
@@ -16,7 +16,7 @@ It's the one of the hardest projects I ever built so far. I learned a lot along 
 - Users receive notifications when there's an update in friendship state.
 - Users can log in with their Google accounts.
 - Users can add a profile image.
-- Users can share posts containig text and images.
+- Users can share posts containing text and images.
 - Users can like and comment on posts.
 - Posts have real-time commenting.
 - Timeline feature as known as 'Flow'.
