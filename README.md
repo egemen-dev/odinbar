@@ -35,5 +35,5 @@ It's the one of the hardest projects I ever built so far. I learned a lot along 
 ## Mobile view:
 
 <p align="center">
-  <img width="820" height="480" src="https://user-images.githubusercontent.com/93445248/182111270-454173b1-95e0-4074-82bc-c4586842ce5f.jpg">
+  <img src="https://user-images.githubusercontent.com/93445248/182111270-454173b1-95e0-4074-82bc-c4586842ce5f.jpg">
 </p>
