@@ -37,3 +37,7 @@ It's the one of the hardest projects I ever built so far. I learned a lot along 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/93445248/182111270-454173b1-95e0-4074-82bc-c4586842ce5f.jpg">
 </p>
+
+Notes: 
+
+- I disabled live commenting feature in production because Heroku needs add-ons for turbo streams to work.
