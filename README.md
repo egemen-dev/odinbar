@@ -41,3 +41,6 @@ It's the one of the hardest projects I ever built so far. I learned a lot along 
 Notes: 
 
 - I disabled live commenting feature in production because Heroku needs add-ons for turbo streams to work.
+
+TODOS:
+* Add test coverage results
