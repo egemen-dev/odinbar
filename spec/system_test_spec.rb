@@ -37,6 +37,7 @@ RSpec.describe 'User Actions', type: :system do
       fill_in 'comment_body', with: 'LALALA'
       click_on 'Create Comment'
       expect(page).to have_content('0 likes | 1 comment')
+      click_on 'Comment'
       click_on 'delete'
       expect(page).to have_content('0 likes | 0 comment')
     end
