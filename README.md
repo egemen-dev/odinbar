@@ -32,6 +32,10 @@ It's the one of the hardest projects I ever built so far. I learned a lot along 
 - Rspec for testing (model & integration)
 - Heroku for deployment
 
+## Test Results:
+![222222](https://user-images.githubusercontent.com/93445248/183984677-7d841c55-d5e5-4fa4-93da-be90baafc9dc.jpg)
+- After adding OmniAuth, coverage rate dropped from 95-ish to 88 percents and I haven't create a test case for OmniAuth yet.
+
 ## Mobile view:
 
 <p align="center">
@@ -43,4 +47,4 @@ Notes:
 - I disabled live commenting feature in production because Heroku needs add-ons for turbo streams to work.
 
 TODOS:
-* Add test coverage results
+* none
