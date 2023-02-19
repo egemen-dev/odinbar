@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Friendship < ApplicationRecord
   # Relations
   belongs_to :user
@@ -20,8 +22,8 @@ class Friendship < ApplicationRecord
   end
 
   def user_and_friend_are_not_the_same
-    if friend == user
-      errors.add(:friendship, "can't be friends with same account")
-    end
+    return unless friend == user
+
+    errors.add(:friendship, "can't be friends with same account")
   end
 end

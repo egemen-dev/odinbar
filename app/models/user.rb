@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
-  after_create :send_welcome_mail
+  # after_create :send_welcome_mail
 
   # Relations
   has_many :posts, dependent: :destroy
@@ -8,14 +10,22 @@ class User < ApplicationRecord
   has_many :liked_posts, through: :post_likings, source: :post
   has_many :friendships, dependent: :destroy
   has_many :notifications, dependent: :destroy
-  has_many :sent_requests, -> { where status: nil }, class_name: 'Friendship', foreign_key: 'user_id', dependent: :destroy
-  has_many :received_requests, -> { where status: nil }, class_name: 'Friendship', foreign_key: 'friend_id', dependent: :destroy
+  has_many :sent_requests, lambda {
+                             where status: nil
+                           }, class_name: 'Friendship', foreign_key: 'user_id', dependent: :destroy
+  has_many :received_requests, lambda {
+                                 where status: nil
+                               }, class_name: 'Friendship', foreign_key: 'friend_id', dependent: :destroy
 
   # Friend request from me and accepted by receiver user
-  has_many :acceptance_by_them, -> { where status: true }, class_name: 'Friendship', foreign_key: 'user_id', dependent: :destroy
+  has_many :acceptance_by_them, lambda {
+                                  where status: true
+                                }, class_name: 'Friendship', foreign_key: 'user_id', dependent: :destroy
 
   # Friend request from another user and accepted by me
-  has_many :acceptance_by_me, -> { where status: true }, class_name: 'Friendship', foreign_key: 'friend_id', dependent: :destroy
+  has_many :acceptance_by_me, lambda {
+                                where status: true
+                              }, class_name: 'Friendship', foreign_key: 'friend_id', dependent: :destroy
 
   # Friends that I sent request to
   has_many :type_1_friends, through: :acceptance_by_them, source: :friend
@@ -28,8 +38,8 @@ class User < ApplicationRecord
 
   # Users I received request from
   has_many :request_received_users, through: :received_requests, source: :user
-  
-  # User profile picture  
+
+  # User profile picture
   has_one_attached :avatar
 
   def active_friends
@@ -42,7 +52,7 @@ class User < ApplicationRecord
   end
 
   def friendship_with(user)
-    Friendship.find_by(user_id: user.id, friend_id: self.id) || Friendship.find_by(user_id: self.id, friend_id: user.id)
+    Friendship.find_by(user_id: user.id, friend_id: id) || Friendship.find_by(user_id: id, friend_id: user.id)
   end
 
   # Validations
@@ -55,17 +65,14 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:google_oauth2]
 
   def self.from_omniauth(access_token)
-  data = access_token.info
-  user = User.where(email: data['email']).first
+    data = access_token.info
+    user = User.where(email: data['email']).first
 
     # Uncomment the section below if you want users to be created if they don't exist
-    unless user
-        user = User.create(username: data['name'],
-            email: data['email'],
-            password: Devise.friendly_token[0,20],
-            avatar_url: data['image']
-        )
-    end
+    user ||= User.create(username: data['name'],
+                         email: data['email'],
+                         password: Devise.friendly_token[0, 20],
+                         avatar_url: data['image'])
     user
   end
 

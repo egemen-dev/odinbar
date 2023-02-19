@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
   before_action :authenticate_user!
 
@@ -7,10 +9,10 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.eager_load(:rich_text_body, :user_likes, :comments,
-                            user: [avatar_attachment: :blob])
-                            .where(user: current_user.bubble)
-                            .sort_by(&:created_at)
-                            .reverse
+                             user: [avatar_attachment: :blob])
+                 .where(user: current_user.bubble)
+                 .sort_by(&:created_at)
+                 .reverse
   end
 
   def new
@@ -29,10 +31,10 @@ class PostsController < ApplicationController
   def destroy
     # Only allow to delete if post belongs to current user
     @post = set_post
-    if @post.user == current_user
-      @post.destroy
-      redirect_to root_path, status: :see_other
-    end
+    return unless @post.user == current_user
+
+    @post.destroy
+    redirect_to root_path, status: :see_other
   end
 
   def edit
@@ -42,22 +44,22 @@ class PostsController < ApplicationController
   def update
     @post = set_post
     # Only allow post owner to edit
-    if @post.user == current_user
-      if @post.update(post_params)
-        redirect_to @post
-      else
-        render :edit, status: :unprocessable_entity
-      end
+    return unless @post.user == current_user
+
+    if @post.update(post_params)
+      redirect_to @post
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   private
-    def post_params
-      params.require(:post).permit(:body)
-    end
 
-    def set_post
-      @post = Post.eager_load(:user, :user_likes).find(params[:id])
-    end
+  def post_params
+    params.require(:post).permit(:body)
+  end
+
+  def set_post
+    @post = Post.eager_load(:user, :user_likes).find(params[:id])
+  end
 end
-

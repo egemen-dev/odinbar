@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -5,7 +7,7 @@ RSpec.describe User, type: :model do
     @user1 = User.find_by(username: 'TesterJoe', email: 'testerjoe@gmail.com') || FactoryBot.build(:user)
   end
 
-  describe "Associations" do
+  describe 'Associations' do
     it { should have_many(:friendships).without_validating_presence }
     it { should have_many(:posts).class_name('Post') }
   end

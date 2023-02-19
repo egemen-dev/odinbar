@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NotificationsController < ApplicationController
   before_action :authenticate_user!
 
@@ -6,8 +8,8 @@ class NotificationsController < ApplicationController
   end
 
   def destroy_all
-    if current_user.notifications.destroy_all
-      redirect_to posts_path
-    end
+    return unless current_user.notifications.destroy_all
+
+    redirect_to posts_path
   end
 end

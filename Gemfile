@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -48,7 +50,7 @@ gem 'bootsnap', require: false
 # gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.2"
+gem 'image_processing', '~> 1.2'
 
 # gem "ruby-vips"
 # gem 'vips', '~> 8.11', '>= 8.11.3'
@@ -61,7 +63,7 @@ group :development, :test do
   gem 'shoulda-matchers'
 
   # N+1 warning gem
-    gem 'bullet'
+  gem 'bullet'
 end
 
 group :development do
@@ -78,9 +80,9 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
+  gem 'database_cleaner-active_record'
   gem 'selenium-webdriver'
   gem 'webdrivers'
-  gem 'database_cleaner-active_record'
 end
 
 # gem 'simplecov', require: false, group: :test
@@ -88,9 +90,10 @@ end
 # Login with google acounts
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
-gem "omniauth-rails_csrf_protection"
+gem 'omniauth-rails_csrf_protection'
 
 # SECRET ENV
-gem "figaro"
+gem 'figaro'
 
 # gem "rake", "~> 13.0"
+gem 'rubocop-performance', require: false

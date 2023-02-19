@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Friendship, type: :model do
-  describe "Associations with User" do
+  describe 'Associations with User' do
     it { should belong_to(:user).without_validating_presence }
   end
 
-  describe "Associations with Friend" do
+  describe 'Associations with Friend' do
     it { should belong_to(:friend).class_name('User').without_validating_presence }
   end
 
@@ -37,9 +39,9 @@ RSpec.describe Friendship, type: :model do
     expect(friendship3).to_not be_valid
     expect(friendship3.errors[:friendship]).to include "can't be friends with same account"
   end
-  
+
   it 'fails if user and friend already have a existed friendship' do
-    user1 = build(:user, id:1)
+    user1 = build(:user, id: 1)
     user2 = build(:user, email: 'abctest@gmail.com', username: 'test', id: 2)
 
     # Saving a friendship to database for second_frienship to fail and raise error.
@@ -47,17 +49,19 @@ RSpec.describe Friendship, type: :model do
 
     second_friendship = build(:friendship, friend: user2, user: user1)
     expect(second_friendship).to_not be_valid
-    expect {second_friendship.save!}.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Friendship user and friend already have a mutual friendship")
+    expect do
+      second_friendship.save!
+    end.to raise_error(ActiveRecord::RecordInvalid,
+                       'Validation failed: Friendship user and friend already have a mutual friendship')
   end
 
-  describe "Destruction of user" do
+  describe 'Destruction of user' do
     it 'all friendships of the user gets destroyed as well' do
-
       # user2 has friendships where he's a user (seneder) and a friend (receiver)
       user1 = FactoryBot.create(:user, email: 'user1@gmail.com', username: 'user01', id: 1)
       user2 = FactoryBot.create(:user, email: 'user2@gmail.com', username: 'user02', id: 2)
       user3 = FactoryBot.create(:user, email: 'user3@gmail.com', username: 'user03', id: 3)
-  
+
       create(:friendship, user: user2, friend: user1, status: true)
       create(:friendship, user: user3, friend: user2, status: true)
 

@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
   before(:each) do
-    @test_user = User.find_by(username: 'TesterJoe', email: 'testerjoe@gmail.com') || FactoryBot.build(:user, id:1)
+    @test_user = User.find_by(username: 'TesterJoe', email: 'testerjoe@gmail.com') || FactoryBot.build(:user, id: 1)
   end
 
-  describe "Associations" do
+  describe 'Associations' do
     it { should belong_to(:user).class_name('User') }
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Comment < ApplicationRecord
   # Relations
   belongs_to :user
@@ -12,7 +14,7 @@ class Comment < ApplicationRecord
   #   broadcast_append_to("#{self.post_id}", target: "#{self.post_id}", partial: "posts/comments/comment", locals: { comment: self })
   #   broadcast_update_to("#{self.post_id}", target: "#{self.post_id}_likes_comments", partial: "posts/likesandcomments", locals: { post: self.post })
   # end
-  
+
   # after_destroy_commit do
   #   broadcast_remove_to("#{self.post_id}", target: "comment_#{self.id}")
   #   broadcast_update_to("#{self.post_id}", target: "#{self.post_id}_likes_comments", partial: "posts/likesandcomments", locals: { post: self.post })

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
@@ -86,7 +88,7 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")
 
   if ENV['RAILS_LOG_TO_STDOUT'].present?
-    logger           = ActiveSupport::Logger.new(STDOUT)
+    logger           = ActiveSupport::Logger.new($stdout)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
@@ -99,14 +101,14 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
 
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
+    address: 'smtp.gmail.com',
     port: 587,
-    domain: "example.com",
-    authentication: "plain",
+    domain: 'example.com',
+    authentication: 'plain',
     enable_starttls_auto: true,
-    user_name: ENV["GMAIL"],
-    password: ENV["PASSWORD"]
+    user_name: ENV['GMAIL'],
+    password: ENV['PASSWORD']
   }
 
-  config.action_mailer.default_url_options = { host: "https://obscure-citadel-89619.herokuapp.com" }
+  config.action_mailer.default_url_options = { host: 'https://obscure-citadel-89619.herokuapp.com' }
 end

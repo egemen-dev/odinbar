@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Friendship Spec', type: :feature do
@@ -37,7 +39,7 @@ RSpec.describe 'Friendship Spec', type: :feature do
     login_as(user2)
     visit root_path
     click_on 'Notifications (1)'
-    expect(page).to have_content("You have a new friendship request from TesterJoe")
+    expect(page).to have_content('You have a new friendship request from TesterJoe')
     click_on 'Delete All'
 
     click_on 'My profile'

@@ -1,25 +1,27 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   resources :comments
   root 'users#index'
 
-  devise_for :users, controllers: { 
+  devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations'
   }
-  
-  resources :friendships, only: [:create, :update, :destroy]
+
+  resources :friendships, only: %i[create update destroy]
 
   resources :posts do
-    resources :comments, only: [:new, :create, :destroy]
+    resources :comments, only: %i[new create destroy]
   end
-  
-  resources :post_likings, only: [:create, :destroy]
+
+  resources :post_likings, only: %i[create destroy]
 
   get 'notifications' => 'notifications#index'
   delete 'destroy_notifications' => 'notifications#destroy_all'
 
   resources :users, only: [:index] do
-    get 'show', :as => :profile
+    get 'show', as: :profile
     get 'friends'
     get 'received_requests'
     get 'sent_requests'

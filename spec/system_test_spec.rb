@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'User Actions', type: :system do
@@ -14,10 +16,9 @@ RSpec.describe 'User Actions', type: :system do
       expect(page).to have_content('user1')
 
       click_on 'New Post'
-      find("trix-editor").set("TEST POST")
+      find('trix-editor').set('TEST POST')
       click_on 'Create Post'
-      expect(page).to have_content("TEST POST")
-    
+      expect(page).to have_content('TEST POST')
 
       sleep(2)
       # Like post
